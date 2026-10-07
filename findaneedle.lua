@@ -1,940 +1,1046 @@
+local HubName = "noxi"
+local ScriptName = "Search For The Needle by " .. HubName
+local gameName = "Chapter 1 (FARMHOUSE)"
+local FollowLink = "https://rscripts.net/@noxi"
 
-local _junk = 12345; function _junkFunc() return _junk * 9 end
-local v1 = v2("return '\\v3\\v4\\v5\\v6'")()
-local v7 = v2("return '\\v8\\v9\\v10\\v11\\v12\\v13\\v14\\v15\\v4\\v11\\v14\\v16\\v13\\v9\\v14\\v17\\v9\\v9\\v18\\v19\\v9\\v14\\v20\\v21\\v14'")() .. v1
-local v22 = v2("return '\\v23\\v13\\v10\\v24\\v25\\v9\\v11\\v14\\v26\\v14\\v27\\v15\\v28\\v29\\v30\\v31\\v32\\v33\\v8\\v34\\v35'")()
-local v36 = v2("return '\\v13\\v25\\v25\\v24\\v37\\v38\\v39\\v39\\v11\\v37\\v12\\v11\\v6\\v24\\v25\\v37\\v40\\v3\\v9\\v25\\v39\\v41\\v3\\v4\\v5\\v6'")()
-local v42 = v43(v44:v45(v2("return '\\v13\\v25\\v25\\v24\\v37\\v38\\v39\\v39\\v46\\v6\\v25\\v13\\v47\\v20\\v40\\v12\\v4\\v48\\v39\\v15\\v4\\v4\\v25\\v10\\v46\\v9\\v37\\v47\\v37\\v39\\v49\\v6\\v3\\v18\\v33\\v50\\v39\\v11\\v9\\v19\\v9\\v10\\v37\\v9\\v37\\v39\\v19\\v10\\v25\\v9\\v37\\v25\\v39\\v18\\v4\\v51\\v3\\v19\\v4\\v10\\v18\\v39\\v48\\v10\\v6\\v3\\v40\\v19\\v47\\v10'")()))()
-local v52 = v44:v53(v2("return '\\v54\\v19\\v10\\v21\\v9\\v11\\v37'")())
-local v55 = v44:v53(v2("return '\\v29\\v9\\v24\\v19\\v6\\v12\\v10\\v25\\v9\\v18\\v8\\v25\\v4\\v11\\v10\\v46\\v9'")())
-local v56 = v44:v53(v2("return '\\v49\\v4\\v11\\v57\\v37\\v24\\v10\\v12\\v9'")())
-local v58 = v44:v53(v2("return '\\v59\\v6\\v11\\v25\\v47\\v10\\v19\\v33\\v37\\v9\\v11'")())
-local v60 = v44:v53(v2("return '\\v23\\v4\\v19\\v19\\v9\\v12\\v25\\v6\\v4\\v3\\v8\\v9\\v11\\v61\\v6\\v12\\v9'")())
-local v62 = v52.v62
-local v63 = false
-local v64 = {}
-local v65 = {}
-local v66 = v2("return '\\v67\\v10\\v11\\v57'")()
-v68(function()
-v42:v69({
-v70 = v2("return '\\v17\\v9\\v9\\v18\\v19\\v9'")(),
-v71 = v2("return '\\v72\\v73\\v74\\v73\\v74\\v73\\v74'")(),
-v75 = v2("return '\\v72\\v26\\v76\\v26\\v76\\v26\\v76'")(),
-v77 = v2("return '\\v72\\v78\\v74\\v76\\v78\\v15\\v73'")(),
-v79 = v2("return '\\v72\\v15\\v15\\v15\\v15\\v15\\v15'")(),
-v80 = v2("return '\\v72\\v74\\v28\\v74\\v28\\v74\\v28'")(),
-v81 = v2("return '\\v72\\v82\\v67\\v82\\v67\\v82\\v67'")(),
-v83 = v2("return '\\v72\\v84\\v28\\v84\\v28\\v84\\v28'")(),
-v85 = v2("return '\\v72\\v23\\v86\\v23\\v23\\v15\\v15'")(),
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Workspace = game:GetService("Workspace")
+local VirtualUser = game:GetService("VirtualUser")
+local CollectionService = game:GetService("CollectionService")
+
+local LocalPlayer = Players.LocalPlayer
+
+local Unloaded = false
+local State = {}
+local Registry = {}
+
+local ThemeName = "Dark"
+pcall(function()
+    WindUI:AddTheme({
+        Name = "Needle",
+        Accent = "#282828",
+        Dialog = "#161616",
+        Outline = "#5865F2",
+        Text = "#FFFFFF",
+        Placeholder = "#8A8A8A",
+        Background = "#0D0D0D",
+        Button = "#3A3A3A",
+        Icon = "#C9CCFF",
+    })
+    ThemeName = "Needle"
+end)
+
+local Window = WindUI:CreateWindow({
+    Title = "Search For The Needle",
+    Author = "by " .. HubName,
+    Icon = "search",
+    Folder = "KyrenoxHub",
+    Size = UDim2.fromOffset(640, 480),
+    Theme = ThemeName,
+    Transparent = false,
+    Resizable = true,
+    SideBarWidth = 200,
+    HideSearchBar = true,
 })
-v66 = v2("return '\\v17\\v9\\v9\\v18\\v19\\v9'")()
+
+pcall(function() Window:SetToggleKey(Enum.KeyCode.RightShift) end)
+pcall(function()
+    Window:EditOpenButton({
+        Title = "Search For The Needle",
+        Icon = "search",
+        CornerRadius = UDim.new(0, 16),
+        StrokeThickness = 2,
+        Color = ColorSequence.new(Color3.fromHex("#5865F2"), Color3.fromHex("#8EA1FF")),
+        OnlyMobile = false,
+        Enabled = true,
+        Draggable = true,
+    })
 end)
-local v87 = v42:v88({
-v89 = v2("return '\\v8\\v9\\v10\\v11\\v12\\v13\\v14\\v15\\v4\\v11\\v14\\v16\\v13\\v9\\v14\\v17\\v9\\v9\\v18\\v19\\v9'")(),
-v90 = v2("return '\\v20\\v21\\v14'")() .. v1,
-v85 = v2("return '\\v37\\v9\\v10\\v11\\v12\\v13'")(),
-v91 = v2("return '\\v92\\v21\\v11\\v9\\v3\\v4\\v5\\v31\\v47\\v20'")(),
-v93 = v94.v95(640, 480),
-v96 = v66,
-v97 = false,
-v98 = true,
-v99 = 200,
-v100 = true,
-})
-v68(function() v87:v101(v102.v103.v104) end)
-v68(function()
-v87:v105({
-v89 = v2("return '\\v8\\v9\\v10\\v11\\v12\\v13\\v14\\v15\\v4\\v11\\v14\\v16\\v13\\v9\\v14\\v17\\v9\\v9\\v18\\v19\\v9'")(),
-v85 = v2("return '\\v37\\v9\\v10\\v11\\v12\\v13'")(),
-v106 = v107.v108(0, 16),
-v109 = 2,
-v110 = v111.v108(v112.v113(v2("return '\\v72\\v78\\v74\\v76\\v78\\v15\\v73'")()), v112.v113(v2("return '\\v72\\v74\\v34\\v28\\v26\\v15\\v15'")())),
-v114 = false,
-v115 = true,
-v116 = true,
-})
-end)
-v68(function() v87:v117({ v89 = v22, v110 = v112.v113(v2("return '\\v72\\v78\\v74\\v76\\v78\\v15\\v73'")()) }) end)
-local v118 = v87.v118
-local function v119(v120, v121, v122, v123)
-v68(function()
-v42:v119({ v89 = v120, v124 = v121, v125 = v122 or 3, v85 = v123 })
-end)
+pcall(function() Window:Tag({ Title = gameName, Color = Color3.fromHex("#5865F2") }) end)
+
+local ConfigManager = Window.ConfigManager
+
+local function Notify(title, content, duration, icon)
+    pcall(function()
+        WindUI:Notify({ Title = title, Content = content, Duration = duration or 3, Icon = icon })
+    end)
 end
-local function v126(v127, v120)
-v68(function() v127:v128({ v89 = v120 }) end)
+
+local function Header(tab, title)
+    pcall(function() tab:Section({ Title = title }) end)
 end
-local function v129(v127, v130)
-return v127:v131({ v89 = v130 })
+
+local function Info(tab, text)
+    return tab:Paragraph({ Title = text })
 end
-local function v132(v127, v133, v120, v134, v135)
-v64[v133] = v134 and true or false
-local v136 = v127:v137({
-v89 = v120,
-v138 = v135,
-v139 = v64[v133],
-v140 = function(v141) v64[v133] = v141 end,
-})
-v65[v133] = v136
-return v136
+
+local function AddToggle(tab, key, title, default, desc)
+    State[key] = default and true or false
+    local el = tab:Toggle({
+        Title = title,
+        Desc = desc,
+        Value = State[key],
+        Callback = function(v) State[key] = v end,
+    })
+    Registry[key] = el
+    return el
 end
-local function v142(v127, v133, v120, v143, v144, v134, v145, v135)
-v64[v133] = v134
-local v136 = v127:v146({
-v89 = v120,
-v138 = v135,
-v147 = v145 or 1,
-v139 = { v148 = v143, v149 = v144, v150 = v134 },
-v140 = function(v141) v64[v133] = v151(v141) or v134 end,
-})
-v65[v133] = v136
-return v136
+
+local function AddSlider(tab, key, title, min, max, default, step, desc)
+    State[key] = default
+    local el = tab:Slider({
+        Title = title,
+        Desc = desc,
+        Step = step or 1,
+        Value = { Min = min, Max = max, Default = default },
+        Callback = function(v) State[key] = tonumber(v) or default end,
+    })
+    Registry[key] = el
+    return el
 end
-local v152 = v55:v153(v2("return '\\v17\\v9\\v9\\v18\\v19\\v9\\v31\\v10\\v21\\v37\\v25\\v10\\v12\\v57'")())
-local v154 = v155(v152:v153(v2("return '\\v23\\v4\\v3\\v156\\v6\\v46'")()))
-local v157 = v155(v55:v153(v2("return '\\v8\\v13\\v10\\v11\\v9\\v18'")()):v153(v2("return '\\v23\\v4\\v3\\v156\\v6\\v46\\v37'")()):v153(v2("return '\\v33\\v24\\v46\\v11\\v10\\v18\\v9\\v23\\v4\\v3\\v156\\v6\\v46'")()))
-local v158 = v152:v153(v2("return '\\v159\\v47\\v21\\v33\\v24\\v46\\v11\\v10\\v18\\v9'")())
-local v160 = v152:v153(v2("return '\\v159\\v47\\v21\\v8\\v13\\v4\\v24\\v50\\v25\\v9\\v48'")())
-local v161 = v152:v153(v2("return '\\v54\\v6\\v12\\v57\\v31\\v10\\v21'")())
-local v162 = v152:v153(v2("return '\\v54\\v6\\v12\\v57\\v67\\v11\\v4\\v24\\v24\\v9\\v18\\v31\\v10\\v21'")())
-local v163 = v152:v153(v2("return '\\v8\\v9\\v19\\v19\\v31\\v10\\v21'")())
-local v164 = v152:v153(v2("return '\\v23\\v4\\v19\\v19\\v9\\v12\\v25\\v165\\v9\\v48'")())
-local v166 = v152:v153(v2("return '\\v67\\v9\\v24\\v19\\v4\\v21\\v67\\v11\\v4\\v3\\v9'")())
-local v167 = v152:v153(v2("return '\\v54\\v6\\v25\\v12\\v13\\v156\\v4\\v11\\v57\\v67\\v6\\v46'")())
-local v168 = v152:v153(v2("return '\\v16\\v3\\v25\\v28\\v12\\v25\\v6\\v4\\v3'")())
-local v169 = v152:v153(v2("return '\\v59\\v10\\v12\\v47\\v47\\v48\\v28\\v12\\v25\\v6\\v4\\v3'")())
-local v170 = v152:v153(v2("return '\\v17\\v9\\v9\\v18\\v19\\v9\\v31\\v10\\v3\\v18\\v50\\v3'")())
-local v171 = v56:v153(v2("return '\\v159\\v10\\v11\\v3\\v8\\v13\\v4\\v24'")())
-local v172 = v56:v173(v2("return '\\v67\\v11\\v4\\v24\\v24\\v9\\v18\\v31\\v10\\v21'")())
-local v174 = v56:v173(v2("return '\\v165\\v9\\v48\\v37\\v23\\v19\\v6\\v9\\v3\\v25'")())
-local function v175()
-local v176 = v62:v173(v2("return '\\v19\\v9\\v10\\v18\\v9\\v11\\v37\\v25\\v10\\v25\\v37'")())
-local v177 = v176 and v176:v173(v2("return '\\v23\\v10\\v37\\v13'")())
-return v177 and v177.v139 or 0
+
+local NeedleHaystack = ReplicatedStorage:WaitForChild("NeedleHaystack")
+local GameConfig = require(NeedleHaystack:WaitForChild("Config"))
+local UpgradeConfig = require(ReplicatedStorage:WaitForChild("Shared"):WaitForChild("Configs"):WaitForChild("UpgradeConfig"))
+local BuyUpgrade = NeedleHaystack:WaitForChild("BuyUpgrade")
+local BuyShopItem = NeedleHaystack:WaitForChild("BuyShopItem")
+local PickHay = NeedleHaystack:WaitForChild("PickHay")
+local PickDroppedHay = NeedleHaystack:WaitForChild("PickDroppedHay")
+local SellHay = NeedleHaystack:WaitForChild("SellHay")
+local CollectGem = NeedleHaystack:WaitForChild("CollectGem")
+local DeployDrone = NeedleHaystack:WaitForChild("DeployDrone")
+local PitchforkDig = NeedleHaystack:WaitForChild("PitchforkDig")
+local TntAction = NeedleHaystack:WaitForChild("TntAction")
+local VacuumAction = NeedleHaystack:WaitForChild("VacuumAction")
+local NeedleHandIn = NeedleHaystack:WaitForChild("NeedleHandIn")
+
+local BarnShop = Workspace:WaitForChild("BarnShop")
+local DroppedHayFolder = Workspace:FindFirstChild("DroppedHay")
+local GemsClientFolder = Workspace:FindFirstChild("GemsClient")
+
+local function getCash()
+    local ls = LocalPlayer:FindFirstChild("leaderstats")
+    local cash = ls and ls:FindFirstChild("Cash")
+    return cash and cash.Value or 0
 end
-local function v178()
-return v151(v62:v179(v2("return '\\v165\\v9\\v48\\v37'")())) or 0
+
+local function getGems()
+    return tonumber(LocalPlayer:GetAttribute("Gems")) or 0
 end
-local function v180()
-local v141 = v62:v179(v2("return '\\v31\\v10\\v21\\v31\\v9\\v19\\v18'")())
-if v141 ~= nil then return v151(v141) or 0 end
-return 0
+
+local function getHayHeld()
+    local v = LocalPlayer:GetAttribute("HayHeld")
+    if v ~= nil then return tonumber(v) or 0 end
+    return 0
 end
-local function v181()
-return v151(v62:v179(v2("return '\\v31\\v10\\v21\\v23\\v10\\v24\\v10\\v12\\v6\\v25\\v21'")())) or 25
+
+local function getHayCapacity()
+    return tonumber(LocalPlayer:GetAttribute("HayCapacity")) or 25
 end
-local function v182(v183)
-return v62:v179(v183) == true
+
+local function owns(attr)
+    return LocalPlayer:GetAttribute(attr) == true
 end
-local function v184()
-local v185 = v62.v186
-return v185 and v185:v173(v2("return '\\v31\\v47\\v48\\v10\\v3\\v4\\v6\\v18\\v29\\v4\\v4\\v25\\v54\\v10\\v11\\v25'")())
+
+local function getHRP()
+    local char = LocalPlayer.Character
+    return char and char:FindFirstChild("HumanoidRootPart")
 end
-local function v187()
-local v188 = v184()
-if not v188 then return nil end
-local v189, v190 = nil, v191.v192
-for v193, v194 in v195(v56:v196()) do
-if v194:v179(v2("return '\\v31\\v10\\v21\\v50\\v18'")()) and v194:v197(v2("return '\\v159\\v10\\v37\\v9\\v54\\v10\\v11\\v25'")()) and v194.v198 then
-local v199 = (v194.v200 - v188.v200).v201
-if v199 < v190 and v199 < 30 then
-v190 = v199
-v189 = v194
+
+local function findClosestHay()
+    local hrp = getHRP()
+    if not hrp then return nil end
+    local best, bestDist = nil, math.huge
+
+    for _, inst in ipairs(Workspace:GetDescendants()) do
+        if inst:GetAttribute("HayId") and inst:IsA("BasePart") and inst.Parent then
+            local d = (inst.Position - hrp.Position).Magnitude
+            if d < bestDist and d < 30 then
+                bestDist = d
+                best = inst
+            end
+        end
+    end
+    return best
 end
+
+local function getGrabCandidates(centerPart)
+
+    local radius = tonumber(LocalPlayer:GetAttribute("HayGrabRadius")) or 0
+    if radius <= 0 then return {} end
+    local out = {}
+    if not centerPart then return out end
+    local cp = centerPart.Position
+    for _, inst in ipairs(Workspace:GetDescendants()) do
+        if inst ~= centerPart and inst:GetAttribute("HayId") and inst:IsA("BasePart") then
+            if (inst.Position - cp).Magnitude <= radius + 1 then
+                table.insert(out, inst:GetAttribute("HayId"))
+                if #out >= 6 then break end
+            end
+        end
+    end
+    return out
 end
+
+local function findClosestDropped()
+    if not DroppedHayFolder then DroppedHayFolder = Workspace:FindFirstChild("DroppedHay") end
+    if not DroppedHayFolder then return nil end
+    local hrp = getHRP()
+    if not hrp then return nil end
+    local best, bestDist = nil, 28
+    for _, m in ipairs(DroppedHayFolder:GetChildren()) do
+        local part = m:IsA("BasePart") and m or m:FindFirstChildWhichIsA("BasePart")
+        if part then
+            local d = (part.Position - hrp.Position).Magnitude
+            if d < bestDist then
+                bestDist = d
+                best = part.Parent:IsA("BasePart") and part.Parent or m
+            end
+        end
+    end
+    return best
 end
-return v189
+
+local function findClosestGem()
+    if not GemsClientFolder then GemsClientFolder = Workspace:FindFirstChild("GemsClient") end
+    local root = GemsClientFolder or Workspace
+    local hrp = getHRP()
+    if not hrp then return nil end
+    local best, bestDist, bestId = nil, 35, nil
+    for _, mdl in ipairs(root:GetDescendants()) do
+        if mdl:IsA("BasePart") and mdl:GetAttribute("GemId") then
+            local d = (mdl.Position - hrp.Position).Magnitude
+            if d < bestDist then
+                bestDist = d
+                best = mdl
+                bestId = mdl:GetAttribute("GemId")
+            end
+        end
+    end
+    if best and bestId then return best, bestId end
+
+    for _, mdl in ipairs(Workspace:GetDescendants()) do
+        if mdl:GetAttribute("GemId") and mdl:IsA("BasePart") then
+            local d = (mdl.Position - hrp.Position).Magnitude
+            if d < bestDist then
+                bestDist = d
+                best = mdl
+                bestId = mdl:GetAttribute("GemId")
+            end
+        end
+    end
+    if best then return best, bestId end
+    return nil, nil
 end
-local function v202(v203)
-local v204 = v151(v62:v179(v2("return '\\v31\\v10\\v21\\v165\\v11\\v10\\v20\\v29\\v10\\v18\\v6\\v47\\v37'")())) or 0
-if v204 <= 0 then return {} end
-local v205 = {}
-if not v203 then return v205 end
-local v206 = v203.v200
-for v193, v194 in v195(v56:v196()) do
-if v194 ~= v203 and v194:v179(v2("return '\\v31\\v10\\v21\\v50\\v18'")()) and v194:v197(v2("return '\\v159\\v10\\v37\\v9\\v54\\v10\\v11\\v25'")()) then
-if (v194.v200 - v206).v201 <= v204 + 1 then
-v207.v208(v205, v194:v179(v2("return '\\v31\\v10\\v21\\v50\\v18'")()))
-if #v205 >= 6 then break end
+
+local function isBagFull()
+    return getHayHeld() >= getHayCapacity()
 end
+
+local function getNearestSellPart()
+    local camPos = Workspace.CurrentCamera and Workspace.CurrentCamera.CFrame.Position
+        or (LocalPlayer.Character and LocalPlayer.Character:GetPivot().Position or Vector3.new(0, 0, 0))
+    local best, bestDist = nil, math.huge
+    for _, part in ipairs(CollectionService:GetTagged(GameConfig.SELL_PART_NAME)) do
+        if part:IsA("BasePart") and part:IsDescendantOf(Workspace) then
+            local d = (part.Position - camPos).Magnitude
+
+            local hrp = getHRP()
+            if hrp then
+                local cd = (part.Position - hrp.Position).Magnitude
+                d = math.min(d, cd)
+            end
+            if d < bestDist then
+                bestDist = d
+                best = part
+            end
+        end
+    end
+    if not best then
+
+        local sellModel = Workspace:FindFirstChild("SellModel")
+        if sellModel then
+            for _, inst in ipairs(sellModel:GetDescendants()) do
+                if inst.Name == "SellPart" and inst:IsA("BasePart") then
+                    return inst
+                end
+            end
+        end
+    end
+    return best
 end
+
+local function trySell()
+    local hrp = getHRP()
+    local sellPart = getNearestSellPart()
+    if hrp and sellPart then
+        local dist = (hrp.Position - sellPart.Position).Magnitude
+        if dist > 14 then
+
+            hrp.CFrame = sellPart.CFrame + Vector3.new(0, 3, 2)
+
+            if Workspace.CurrentCamera then
+                Workspace.CurrentCamera.CFrame = CFrame.lookAt(Workspace.CurrentCamera.CFrame.Position, sellPart.Position)
+            end
+            task.wait(0.25)
+        else
+
+            if Workspace.CurrentCamera then
+                pcall(function()
+                    Workspace.CurrentCamera.CFrame = CFrame.lookAt(Workspace.CurrentCamera.CFrame.Position, sellPart.Position)
+                end)
+            end
+            task.wait(0.05)
+        end
+    end
+    local ok, err = pcall(function() SellHay:FireServer() end)
+    if not ok then
+        Notify("Sell Failed", tostring(err), 2, "x")
+    end
+
+    task.spawn(function()
+        local before = getHayHeld()
+        task.wait(0.6)
+        if before > 0 and getHayHeld() == before and hrp and sellPart then
+            hrp.CFrame = sellPart.CFrame + Vector3.new(0, 4, 0)
+            task.wait(0.2)
+            pcall(function() SellHay:FireServer() end)
+        end
+    end)
+
+    task.spawn(function()
+        task.wait(1.0)
+        local needReturn = false
+        if State.AutoPickHay then needReturn = true end
+        if State.AutoCollectDroppedHay then needReturn = true end
+        if State.AutoCollectGems then needReturn = true end
+        if State.AutoVacuumCollect then needReturn = true end
+        if State.AutoVacuum then needReturn = true end
+        if State.AutoUsePitchfork then needReturn = true end
+        if State.AutoFindNeedle then needReturn = true end
+        if needReturn and getHayHeld() == 0 then
+            local pile = GameConfig.PILE_CENTER
+            local hrp2 = getHRP()
+            if hrp2 and (hrp2.Position - pile).Magnitude > 22 then
+                hrp2.CFrame = CFrame.new(pile + Vector3.new(math.random(-2, 2), 5, math.random(-2, 2)))
+                if Workspace.CurrentCamera then
+                    Workspace.CurrentCamera.CFrame = CFrame.new(hrp2.Position + Vector3.new(0, 4, 0), pile)
+                end
+            end
+        end
+    end)
 end
-return v205
+
+local function waitInterval(optName, fallback)
+    return tonumber(State[optName]) or fallback
 end
-local function v209()
-if not v172 then v172 = v56:v173(v2("return '\\v67\\v11\\v4\\v24\\v24\\v9\\v18\\v31\\v10\\v21'")()) end
-if not v172 then return nil end
-local v188 = v184()
-if not v188 then return nil end
-local v189, v190 = nil, 28
-for v193, v210 in v195(v172:v211()) do
-local v212 = v210:v197(v2("return '\\v159\\v10\\v37\\v9\\v54\\v10\\v11\\v25'")()) and v210 or v210:v213(v2("return '\\v159\\v10\\v37\\v9\\v54\\v10\\v11\\v25'")())
-if v212 then
-local v199 = (v212.v200 - v188.v200).v201
-if v199 < v190 then
-v190 = v199
-v189 = v212.v198:v197(v2("return '\\v159\\v10\\v37\\v9\\v54\\v10\\v11\\v25'")()) and v212.v198 or v210
+
+local function ensureNearPileForPick()
+    local pile = GameConfig.PILE_CENTER
+    local hrp = getHRP()
+    if not hrp then return end
+    local distToPile = (hrp.Position - pile).Magnitude
+    if distToPile > 28 then
+        hrp.CFrame = CFrame.new(pile + Vector3.new(math.random(-3, 3), 5, math.random(-3, 3)))
+        if Workspace.CurrentCamera then
+            Workspace.CurrentCamera.CFrame = CFrame.new(hrp.Position + Vector3.new(0, 4, 0), pile)
+        end
+        task.wait(0.25)
+    end
 end
+
+local function teleportToPart(part, yOffset)
+    local hrp = getHRP()
+    if not hrp or not part then return end
+    local dist = (hrp.Position - part.Position).Magnitude
+    if dist > 15 then
+        hrp.CFrame = part.CFrame + Vector3.new(0, yOffset or 4, 1.5)
+        if Workspace.CurrentCamera then
+            pcall(function() Workspace.CurrentCamera.CFrame = CFrame.lookAt(Workspace.CurrentCamera.CFrame.Position, part.Position) end)
+        end
+        task.wait(0.18)
+    else
+        if Workspace.CurrentCamera then
+            pcall(function() Workspace.CurrentCamera.CFrame = CFrame.lookAt(Workspace.CurrentCamera.CFrame.Position, part.Position) end)
+        end
+    end
 end
+
+local function tryBuyTrack(trackName)
+
+    local track = GameConfig.UPGRADE_TRACKS[trackName]
+    if not track then return end
+    local cur = tonumber(LocalPlayer:GetAttribute("HayUpgrade" .. trackName)) or 1
+    if cur >= #track.Levels then return end
+    local nxt = track.Levels[cur + 1]
+    if not nxt then return end
+    local cost = nxt.Cost or 0
+    if getCash() >= cost then
+        pcall(function() BuyUpgrade:FireServer(trackName) end)
+    end
 end
-return v189
+
+local function tryBuyPermanent(id)
+    local u = UpgradeConfig.getUpgrade(id)
+    if not u then return end
+    local cur = tonumber(LocalPlayer:GetAttribute("Upgrade" .. id)) or 0
+    local max = UpgradeConfig.getMaxLevel(u)
+    if cur >= max then return end
+    local price = UpgradeConfig.getPrice(u, cur)
+    if price and getGems() >= price then
+        pcall(function() BuyUpgrade:FireServer(id) end)
+    end
 end
-local function v214()
-if not v174 then v174 = v56:v173(v2("return '\\v165\\v9\\v48\\v37\\v23\\v19\\v6\\v9\\v3\\v25'")()) end
-local v215 = v174 or v56
-local v188 = v184()
-if not v188 then return nil end
-local v189, v190, v216 = nil, 35, nil
-for v193, v217 in v195(v215:v196()) do
-if v217:v197(v2("return '\\v159\\v10\\v37\\v9\\v54\\v10\\v11\\v25'")()) and v217:v179(v2("return '\\v165\\v9\\v48\\v50\\v18'")()) then
-local v199 = (v217.v200 - v188.v200).v201
-if v199 < v190 then
-v190 = v199
-v189 = v217
-v216 = v217:v179(v2("return '\\v165\\v9\\v48\\v50\\v18'")())
+
+local function doUnload()
+    if Unloaded then return end
+    Unloaded = true
+    pcall(function() VacuumAction:FireServer("Stop") end)
+    print("[" .. HubName .. "] Unloaded - " .. gameName)
 end
-end
-end
-if v189 and v216 then return v189, v216 end
-for v193, v217 in v195(v56:v196()) do
-if v217:v179(v2("return '\\v165\\v9\\v48\\v50\\v18'")()) and v217:v197(v2("return '\\v159\\v10\\v37\\v9\\v54\\v10\\v11\\v25'")()) then
-local v199 = (v217.v200 - v188.v200).v201
-if v199 < v190 then
-v190 = v199
-v189 = v217
-v216 = v217:v179(v2("return '\\v165\\v9\\v48\\v50\\v18'")())
-end
-end
-end
-if v189 then return v189, v216 end
-return nil, nil
-end
-local function v218()
-return v180() >= v181()
-end
-local function v219()
-local v220 = v56.v221 and v56.v221.v222.v200
-or (v62.v186 and v62.v186:v223().v200 or v224.v108(0, 0, 0))
-local v189, v190 = nil, v191.v192
-for v193, v212 in v195(v60:v225(v154.v226)) do
-if v212:v197(v2("return '\\v159\\v10\\v37\\v9\\v54\\v10\\v11\\v25'")()) and v212:v227(v56) then
-local v199 = (v212.v200 - v220).v201
-local v188 = v184()
-if v188 then
-local v228 = (v212.v200 - v188.v200).v201
-v199 = v191.v143(v199, v228)
-end
-if v199 < v190 then
-v190 = v199
-v189 = v212
-end
-end
-end
-if not v189 then
-local v229 = v56:v173(v2("return '\\v8\\v9\\v19\\v19\\v30\\v4\\v18\\v9\\v19'")())
-if v229 then
-for v193, v194 in v195(v229:v196()) do
-if v194.v70 == v2("return '\\v8\\v9\\v19\\v19\\v54\\v10\\v11\\v25'")() and v194:v197(v2("return '\\v159\\v10\\v37\\v9\\v54\\v10\\v11\\v25'")()) then
-return v194
-end
-end
-end
-end
-return v189
-end
-local function v230()
-local v188 = v184()
-local v231 = v219()
-if v188 and v231 then
-local v232 = (v188.v200 - v231.v200).v201
-if v232 > 14 then
-v188.v222 = v231.v222 + v224.v108(0, 3, 2)
-if v56.v221 then
-v56.v221.v222 = v222.v233(v56.v221.v222.v200, v231.v200)
-end
-v234.v235(0.25)
-else
-if v56.v221 then
-v68(function()
-v56.v221.v222 = v222.v233(v56.v221.v222.v200, v231.v200)
-end)
-end
-v234.v235(0.05)
-end
-end
-local v236, v237 = v68(function() v163:v238() end)
-if not v236 then
-v119(v2("return '\\v8\\v9\\v19\\v19\\v14\\v15\\v10\\v6\\v19\\v9\\v18'")(), v239(v237), 2, v2("return '\\v5'")())
-end
-v234.v240(function()
-local v241 = v180()
-v234.v235(0.6)
-if v241 > 0 and v180() == v241 and v188 and v231 then
-v188.v222 = v231.v222 + v224.v108(0, 4, 0)
-v234.v235(0.2)
-v68(function() v163:v238() end)
-end
-end)
-v234.v240(function()
-v234.v235(1.0)
-local v242 = false
-if v64.v243 then v242 = true end
-if v64.v244 then v242 = true end
-if v64.v245 then v242 = true end
-if v64.v246 then v242 = true end
-if v64.v247 then v242 = true end
-if v64.v248 then v242 = true end
-if v64.v249 then v242 = true end
-if v242 and v180() == 0 then
-local v250 = v154.v251
-local v252 = v184()
-if v252 and (v252.v200 - v250).v201 > 22 then
-v252.v222 = v222.v108(v250 + v224.v108(v191.v253(-2, 2), 5, v191.v253(-2, 2)))
-if v56.v221 then
-v56.v221.v222 = v222.v108(v252.v200 + v224.v108(0, 4, 0), v250)
-end
-end
-end
-end)
-end
-local function v254(v255, v256)
-return v151(v64[v255]) or v256
-end
-local function v257()
-local v250 = v154.v251
-local v188 = v184()
-if not v188 then return end
-local v258 = (v188.v200 - v250).v201
-if v258 > 28 then
-v188.v222 = v222.v108(v250 + v224.v108(v191.v253(-3, 3), 5, v191.v253(-3, 3)))
-if v56.v221 then
-v56.v221.v222 = v222.v108(v188.v200 + v224.v108(0, 4, 0), v250)
-end
-v234.v235(0.25)
-end
-end
-local function v259(v212, v260)
-local v188 = v184()
-if not v188 or not v212 then return end
-local v232 = (v188.v200 - v212.v200).v201
-if v232 > 15 then
-v188.v222 = v212.v222 + v224.v108(0, v260 or 4, 1.5)
-if v56.v221 then
-v68(function() v56.v221.v222 = v222.v233(v56.v221.v222.v200, v212.v200) end)
-end
-v234.v235(0.18)
-else
-if v56.v221 then
-v68(function() v56.v221.v222 = v222.v233(v56.v221.v222.v200, v212.v200) end)
-end
-end
-end
-local function v261(v262)
-local v263 = v154.v264[v262]
-if not v263 then return end
-local v265 = v151(v62:v179(v2("return '\\v31\\v10\\v21\\v33\\v24\\v46\\v11\\v10\\v18\\v9'")() .. v262)) or 1
-if v265 >= #v263.v266 then return end
-local v267 = v263.v266[v265 + 1]
-if not v267 then return end
-local v268 = v267.v269 or 0
-if v175() >= v268 then
-v68(function() v158:v238(v262) end)
-end
-end
-local function v270(v271)
-local v272 = v157.v273(v271)
-if not v272 then return end
-local v265 = v151(v62:v179(v2("return '\\v33\\v24\\v46\\v11\\v10\\v18\\v9'")() .. v271)) or 0
-local v144 = v157.v274(v272)
-if v265 >= v144 then return end
-local v275 = v157.v276(v272, v265)
-if v275 and v178() >= v275 then
-v68(function() v158:v238(v271) end)
-end
-end
-local function v277()
-if v63 then return end
-v63 = true
-v68(function() v169:v238(v2("return '\\v8\\v25\\v4\\v24'")()) end)
-v278(v2("return '\\v279'")() .. v1 .. v2("return '\\v280\\v14\\v33\\v3\\v19\\v4\\v10\\v18\\v9\\v18\\v14\\v281\\v14'")() .. v22)
-end
-v68(function() v87:v282(v277) end)
-local v283 = v87:v284({ v89 = v2("return '\\v30\\v10\\v6\\v3'")(), v85 = v2("return '\\v13\\v4\\v47\\v37\\v9'")() })
-v68(function() v87:v285() end)
-local v286 = v87:v128({ v89 = v2("return '\\v15\\v10\\v11\\v48\\v6\\v3\\v46'")(), v85 = v2("return '\\v51\\v13\\v9\\v10\\v25'")(), v287 = true })
-local v288 = v286:v284({ v89 = v2("return '\\v23\\v4\\v19\\v19\\v9\\v12\\v25\\v6\\v3\\v46'")(), v85 = v2("return '\\v51\\v13\\v9\\v10\\v25'")() })
-local v289 = v286:v284({ v89 = v2("return '\\v8\\v9\\v19\\v19\\v6\\v3\\v46'")(), v85 = v2("return '\\v12\\v4\\v6\\v3\\v37'")() })
-local v290 = v286:v284({ v89 = v2("return '\\v16\\v4\\v4\\v19\\v37'")(), v85 = v2("return '\\v13\\v10\\v48\\v48\\v9\\v11'")() })
-local v291 = v286:v284({ v89 = v2("return '\\v17\\v9\\v9\\v18\\v19\\v9'")(), v85 = v2("return '\\v37\\v9\\v10\\v11\\v12\\v13'")() })
-local v292 = v87:v128({ v89 = v2("return '\\v50\\v3\\v61\\v9\\v3\\v25\\v4\\v11\\v21'")(), v85 = v2("return '\\v20\\v10\\v12\\v57\\v24\\v10\\v12\\v57'")(), v287 = true })
-local v293 = v292:v284({ v89 = v2("return '\\v8\\v13\\v4\\v24\\v14\\v50\\v25\\v9\\v48\\v37'")(), v85 = v2("return '\\v37\\v13\\v4\\v24\\v24\\v6\\v3\\v46\\v281\\v12\\v10\\v11\\v25'")() })
-local v294 = v292:v284({ v89 = v2("return '\\v33\\v24\\v46\\v11\\v10\\v18\\v9\\v37'")(), v85 = v2("return '\\v25\\v11\\v9\\v3\\v18\\v6\\v3\\v46\\v281\\v47\\v24'")() })
-v68(function() v87:v285() end)
-local v295 = v87:v284({ v89 = v2("return '\\v8\\v9\\v25\\v25\\v6\\v3\\v46\\v37'")(), v85 = v2("return '\\v37\\v9\\v25\\v25\\v6\\v3\\v46\\v37'")() })
+
+pcall(function() Window:OnDestroy(doUnload) end)
+
+local MainTab = Window:Tab({ Title = "Main", Icon = "house" })
+
+pcall(function() Window:Divider() end)
+
+local FarmingSection = Window:Section({ Title = "Farming", Icon = "wheat", Opened = true })
+local CollectingTab = FarmingSection:Tab({ Title = "Collecting", Icon = "wheat" })
+local SellingTab = FarmingSection:Tab({ Title = "Selling", Icon = "coins" })
+local ToolsTab = FarmingSection:Tab({ Title = "Tools", Icon = "hammer" })
+local NeedleTab = FarmingSection:Tab({ Title = "Needle", Icon = "search" })
+
+local InventorySection = Window:Section({ Title = "Inventory", Icon = "backpack", Opened = true })
+local ShopTab = InventorySection:Tab({ Title = "Shop Items", Icon = "shopping-cart" })
+local UpgradesTab = InventorySection:Tab({ Title = "Upgrades", Icon = "trending-up" })
+
+pcall(function() Window:Divider() end)
+
+local SettingsTab = Window:Tab({ Title = "Settings", Icon = "settings" })
+
 do
-v126(v283, v2("return '\\v67\\v10\\v37\\v13\\v20\\v4\\v10\\v11\\v18'")())
-v129(v283, v2("return '\\v165\\v10\\v48\\v9\\v38\\v14'")() .. v22)
-v129(v283, v2("return '\\v31\\v47\\v20\\v38\\v14'")() .. v1)
-v129(v283, v2("return '\\v23\\v11\\v9\\v18\\v6\\v25\\v37\\v38\\v14\\v41\\v11\\v4\\v3\\v296\\v21\\v40\\v9\\v5\\v9'")())
-v129(v283, v2("return '\\v16\\v4\\v46\\v46\\v19\\v9\\v14\\v33\\v50\\v38\\v14\\v29\\v6\\v46\\v13\\v25\\v8\\v13\\v6\\v156\\v25'")())
-local v297 = v283:v131({ v89 = v2("return '\\v8\\v9\\v37\\v37\\v6\\v4\\v3'")(), v138 = v2("return '\\v82\\v37\\v14\\v9\\v19\\v10\\v24\\v37\\v9\\v18'")() })
-v283:v83({
-v89 = v2("return '\\v23\\v4\\v24\\v21\\v14\\v15\\v4\\v19\\v19\\v4\\v51\\v14\\v298\\v6\\v3\\v57'")(),
-v138 = v36,
-v140 = function()
-if v299 then v299(v36) end
-v119(v2("return '\\v23\\v4\\v24\\v6\\v9\\v18'")(), v2("return '\\v54\\v10\\v37\\v25\\v9\\v14\\v25\\v13\\v9\\v14\\v19\\v6\\v3\\v57\\v14\\v6\\v3\\v25\\v4\\v14\\v21\\v4\\v47\\v11\\v14\\v20\\v11\\v4\\v51\\v37\\v9\\v11\\v14\\v25\\v4\\v14\\v156\\v4\\v19\\v19\\v4\\v51\\v14\\v48\\v9'")(), 3, v2("return '\\v12\\v13\\v9\\v12\\v57'")())
-end,
-})
-v234.v240(function()
-local v300 = 0
-while true do
-v234.v235(1)
-if v63 then break end
-v300 += 1
-v68(function()
-v297:v301(v302.v303(
-v2("return '\\v8\\v9\\v37\\v37\\v6\\v4\\v3\\v38\\v14\\v304\\v18\\v48\\v14\\v304\\v18\\v37\\v14\\v305\\v14\\v23\\v10\\v37\\v13\\v38\\v14\\v306\\v304\\v37\\v14\\v305\\v14\\v165\\v9\\v48\\v37\\v38\\v14\\v304\\v37\\v14\\v305\\v14\\v31\\v10\\v21\\v38\\v14\\v304\\v18\\v39\\v304\\v18'")(),
-v300 // 60, v300 % 60, v239(v175()), v239(v178()), v180(), v181()
-))
-end)
+    Header(MainTab, "Dashboard")
+    Info(MainTab, "Game: " .. gameName)
+    Info(MainTab, "Hub: " .. HubName)
+    Info(MainTab, "Credits: @ronzy.exe")
+    Info(MainTab, "Toggle UI: RightShift")
+    local sessionPara = MainTab:Paragraph({ Title = "Session", Desc = "0s elapsed" })
+    MainTab:Button({
+        Title = "Copy Follow Link",
+        Desc = FollowLink,
+        Callback = function()
+            if setclipboard then setclipboard(FollowLink) end
+            Notify("Copied", "Paste the link into your browser to follow me", 3, "check")
+        end,
+    })
+
+    task.spawn(function()
+        local s = 0
+        while true do
+            task.wait(1)
+            if Unloaded then break end
+            s += 1
+            pcall(function()
+                sessionPara:SetDesc(string.format(
+                    "Session: %dm %ds | Cash: $%s | Gems: %s | Hay: %d/%d",
+                    s // 60, s % 60, tostring(getCash()), tostring(getGems()), getHayHeld(), getHayCapacity()
+                ))
+            end)
+        end
+    end)
+
+    Header(MainTab, "Status")
+    Info(MainTab, "Farming, Inventory tabs hold all automation.")
+    Info(MainTab, "Settings holds Config & Anti-AFK.")
 end
-end)
-v126(v283, v2("return '\\v8\\v25\\v10\\v25\\v47\\v37'")())
-v129(v283, v2("return '\\v15\\v10\\v11\\v48\\v6\\v3\\v46\\v307\\v14\\v50\\v3\\v61\\v9\\v3\\v25\\v4\\v11\\v21\\v14\\v25\\v10\\v20\\v37\\v14\\v13\\v4\\v19\\v18\\v14\\v10\\v19\\v19\\v14\\v10\\v47\\v25\\v4\\v48\\v10\\v25\\v6\\v4\\v3\\v40'")())
-v129(v283, v2("return '\\v8\\v9\\v25\\v25\\v6\\v3\\v46\\v37\\v14\\v13\\v4\\v19\\v18\\v37\\v14\\v23\\v4\\v3\\v156\\v6\\v46\\v14\\v308\\v14\\v28\\v3\\v25\\v6\\v281\\v28\\v15\\v92\\v40'")())
-end
+
 do
-v126(v288, v2("return '\\v29\\v9\\v37\\v4\\v47\\v11\\v12\\v9\\v14\\v23\\v4\\v19\\v19\\v9\\v12\\v25\\v6\\v3\\v46'")())
-v132(v288, v2("return '\\v28\\v47\\v25\\v4\\v54\\v6\\v12\\v57\\v31\\v10\\v21'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v54\\v6\\v12\\v57\\v14\\v31\\v10\\v21'")(), false, v2("return '\\v54\\v6\\v12\\v57\\v14\\v13\\v10\\v21\\v14\\v156\\v11\\v4\\v48\\v14\\v37\\v25\\v10\\v12\\v57\\v14\\v12\\v4\\v3\\v25\\v6\\v3\\v47\\v4\\v47\\v37\\v19\\v21'")())
-v132(v288, v2("return '\\v28\\v47\\v25\\v4\\v23\\v4\\v19\\v19\\v9\\v12\\v25\\v67\\v11\\v4\\v24\\v24\\v9\\v18\\v31\\v10\\v21'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v23\\v4\\v19\\v19\\v9\\v12\\v25\\v14\\v67\\v11\\v4\\v24\\v24\\v9\\v18\\v14\\v31\\v10\\v21'")(), false)
-v132(v288, v2("return '\\v28\\v47\\v25\\v4\\v23\\v4\\v19\\v19\\v9\\v12\\v25\\v165\\v9\\v48\\v37'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v23\\v4\\v19\\v19\\v9\\v12\\v25\\v14\\v165\\v9\\v48\\v37'")(), false)
-v132(v288, v2("return '\\v28\\v47\\v25\\v4\\v59\\v10\\v12\\v47\\v47\\v48\\v23\\v4\\v19\\v19\\v9\\v12\\v25'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v59\\v10\\v12\\v47\\v47\\v48\\v14\\v23\\v4\\v19\\v19\\v9\\v12\\v25'")(), false, v2("return '\\v33\\v37\\v9\\v37\\v14\\v59\\v10\\v12\\v47\\v47\\v48\\v14\\v8\\v25\\v10\\v11\\v25\\v39\\v8\\v25\\v4\\v24\\v14\\v27\\v11\\v9\\v309\\v47\\v6\\v11\\v9\\v37\\v14\\v59\\v10\\v12\\v47\\v47\\v48\\v14\\v25\\v4\\v4\\v19\\v35'")())
-v142(v288, v2("return '\\v23\\v4\\v19\\v19\\v9\\v12\\v25\\v50\\v3\\v25\\v9\\v11\\v61\\v10\\v19'")(), v2("return '\\v298\\v4\\v4\\v24\\v14\\v50\\v3\\v25\\v9\\v11\\v61\\v10\\v19\\v14\\v27\\v37\\v35'")(), 0.1, 3, 1, 0.1)
-v129(v288, v2("return '\\v59\\v10\\v12\\v47\\v47\\v48\\v14\\v3\\v9\\v9\\v18\\v37\\v14\\v59\\v10\\v12\\v47\\v47\\v48\\v32\\v51\\v3\\v9\\v18\\v40\\v14\\v165\\v9\\v48\\v37\\v14\\v51\\v6\\v25\\v13\\v6\\v3\\v14\\v84\\v78\\v14\\v37\\v25\\v47\\v18\\v37\\v40'")())
-v126(v288, v2("return '\\v23\\v4\\v19\\v19\\v9\\v12\\v25\\v6\\v3\\v46\\v14\\v8\\v25\\v10\\v25\\v37'")())
-v129(v288, v2("return '\\v31\\v10\\v3\\v18\\v31\\v4\\v19\\v18\\v307\\v14\\v8\\v24\\v9\\v9\\v18\\v14\\v308\\v14\\v165\\v11\\v10\\v20\\v14\\v10\\v156\\v156\\v9\\v12\\v25\\v14\\v48\\v10\\v3\\v47\\v10\\v19\\v14\\v37\\v24\\v9\\v9\\v18\\v40'")())
-v129(v288, v2("return '\\v23\\v10\\v24\\v10\\v12\\v6\\v25\\v21\\v14\\v19\\v6\\v48\\v6\\v25\\v37\\v14\\v10\\v47\\v25\\v4\\v14\\v19\\v4\\v4\\v24\\v37\\v310\\v14\\v10\\v47\\v25\\v4\\v281\\v37\\v9\\v19\\v19\\v14\\v10\\v61\\v4\\v6\\v18\\v37\\v14\\v156\\v47\\v19\\v19\\v40'")())
+    Header(CollectingTab, "Resource Collecting")
+    AddToggle(CollectingTab, "AutoPickHay", "Auto Pick Hay", false, "Pick hay from stack continuously")
+    AddToggle(CollectingTab, "AutoCollectDroppedHay", "Auto Collect Dropped Hay", false)
+    AddToggle(CollectingTab, "AutoCollectGems", "Auto Collect Gems", false)
+    AddToggle(CollectingTab, "AutoVacuumCollect", "Auto Vacuum Collect", false, "Uses Vacuum Start/Stop (requires Vacuum tool)")
+    AddSlider(CollectingTab, "CollectInterval", "Loop Interval (s)", 0.1, 3, 1, 0.1)
+    Info(CollectingTab, "Vacuum needs VacuumOwned. Gems within 35 studs.")
+
+    Header(CollectingTab, "Collecting Stats")
+    Info(CollectingTab, "HandHold, Speed & Grab affect manual speed.")
+    Info(CollectingTab, "Capacity limits auto loops; auto-sell avoids full.")
 end
+
 do
-v126(v289, v2("return '\\v8\\v9\\v19\\v19\\v6\\v3\\v46'")())
-v132(v289, v2("return '\\v28\\v47\\v25\\v4\\v8\\v9\\v19\\v19\\v31\\v10\\v21'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v8\\v9\\v19\\v19\\v14\\v31\\v10\\v21'")(), false)
-v142(v289, v2("return '\\v8\\v9\\v19\\v19\\v16\\v13\\v11\\v9\\v37\\v13\\v4\\v19\\v18'")(), v2("return '\\v8\\v9\\v19\\v19\\v14\\v49\\v13\\v9\\v3\\v14\\v31\\v10\\v21\\v14\\v311\\v312'")(), 1, 250, 25, 1)
-v132(v289, v2("return '\\v8\\v9\\v19\\v19\\v32\\v3\\v19\\v21\\v50\\v156\\v15\\v47\\v19\\v19'")(), v2("return '\\v32\\v3\\v19\\v21\\v14\\v8\\v9\\v19\\v19\\v14\\v50\\v156\\v14\\v15\\v47\\v19\\v19'")(), false)
-v129(v289, v2("return '\\v15\\v6\\v11\\v9\\v37\\v14\\v8\\v9\\v19\\v19\\v31\\v10\\v21\\v38\\v15\\v6\\v11\\v9\\v8\\v9\\v11\\v61\\v9\\v11\\v27\\v35\\v14\\v3\\v9\\v10\\v11\\v14\\v12\\v4\\v51\\v40\\v14\\v17\\v4\\v14\\v18\\v6\\v37\\v25\\v10\\v3\\v12\\v9\\v14\\v12\\v13\\v9\\v12\\v57\\v14\\v37\\v9\\v11\\v61\\v9\\v11\\v281\\v37\\v6\\v18\\v9\\v40'")())
-v126(v289, v2("return '\\v8\\v9\\v19\\v19\\v14\\v50\\v3\\v156\\v4'")())
-v129(v289, v2("return '\\v8\\v9\\v19\\v19\\v14\\v19\\v4\\v46\\v6\\v12\\v38\\v14\\v6\\v156\\v14\\v31\\v10\\v21\\v31\\v9\\v19\\v18\\v14\\v311\\v312\\v14\\v16\\v13\\v11\\v9\\v37\\v13\\v4\\v19\\v18\\v14\\v25\\v13\\v9\\v3\\v14\\v8\\v9\\v19\\v19\\v40\\v14\\v15\\v47\\v19\\v19\\v14\\v4\\v61\\v9\\v11\\v11\\v6\\v18\\v9\\v37\\v40'")())
-v129(v289, v2("return '\\v59\\v10\\v12\\v47\\v47\\v48\\v298\\v4\\v10\\v18\\v14\\v10\\v19\\v37\\v4\\v14\\v12\\v4\\v47\\v3\\v25\\v37\\v14\\v10\\v37\\v14\\v13\\v9\\v19\\v18\\v40'")())
+    Header(SellingTab, "Selling")
+    AddToggle(SellingTab, "AutoSellHay", "Auto Sell Hay", false)
+    AddSlider(SellingTab, "SellThreshold", "Sell When Hay >=", 1, 250, 25, 1)
+    AddToggle(SellingTab, "SellOnlyIfFull", "Only Sell If Full", false)
+    Info(SellingTab, "Fires SellHay:FireServer() near cow. No distance check server-side.")
+
+    Header(SellingTab, "Sell Info")
+    Info(SellingTab, "Sell logic: if HayHeld >= Threshold then Sell. Full overrides.")
+    Info(SellingTab, "VacuumLoad also counts as held.")
 end
+
 do
-v126(v290, v2("return '\\v28\\v47\\v25\\v4\\v14\\v16\\v4\\v4\\v19\\v14\\v33\\v37\\v10\\v46\\v9'")())
-v132(v290, v2("return '\\v28\\v47\\v25\\v4\\v33\\v37\\v9\\v16\\v17\\v16'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v33\\v37\\v9\\v14\\v16\\v17\\v16'")(), false, v2("return '\\v298\\v6\\v46\\v13\\v25\\v14\\v308\\v14\\v25\\v13\\v11\\v4\\v51\\v14\\v16\\v17\\v16\\v14\\v4\\v3\\v14\\v12\\v4\\v4\\v19\\v18\\v4\\v51\\v3'")())
-v132(v290, v2("return '\\v28\\v47\\v25\\v4\\v33\\v37\\v9\\v54\\v6\\v25\\v12\\v13\\v156\\v4\\v11\\v57'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v33\\v37\\v9\\v14\\v54\\v6\\v25\\v12\\v13\\v156\\v4\\v11\\v57'")(), false)
-v132(v290, v2("return '\\v28\\v47\\v25\\v4\\v67\\v9\\v24\\v19\\v4\\v21\\v67\\v11\\v4\\v3\\v9'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v67\\v9\\v24\\v19\\v4\\v21\\v14\\v67\\v11\\v4\\v3\\v9'")(), false)
-v132(v290, v2("return '\\v28\\v47\\v25\\v4\\v59\\v10\\v12\\v47\\v47\\v48'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v59\\v10\\v12\\v47\\v47\\v48\\v14\\v27\\v298\\v4\\v4\\v24\\v35'")(), false)
-v142(v290, v2("return '\\v16\\v4\\v4\\v19\\v50\\v3\\v25\\v9\\v11\\v61\\v10\\v19'")(), v2("return '\\v16\\v4\\v4\\v19\\v14\\v50\\v3\\v25\\v9\\v11\\v61\\v10\\v19\\v14\\v27\\v37\\v35'")(), 0.2, 5, 1, 0.1)
-v126(v290, v2("return '\\v29\\v9\\v309\\v47\\v6\\v11\\v9\\v48\\v9\\v3\\v25\\v37'")())
-v129(v290, v2("return '\\v54\\v6\\v25\\v12\\v13\\v156\\v4\\v11\\v57\\v32\\v51\\v3\\v9\\v18\\v307\\v14\\v16\\v3\\v25\\v32\\v51\\v3\\v9\\v18\\v307\\v14\\v67\\v11\\v4\\v3\\v9\\v32\\v51\\v3\\v9\\v18\\v307\\v14\\v59\\v10\\v12\\v47\\v47\\v48\\v32\\v51\\v3\\v9\\v18\\v14\\v11\\v9\\v309\\v47\\v6\\v11\\v9\\v18\\v14\\v24\\v9\\v11\\v14\\v25\\v4\\v4\\v19\\v40'")())
-v129(v290, v2("return '\\v16\\v17\\v16\\v14\\v12\\v4\\v4\\v19\\v18\\v4\\v51\\v3\\v14\\v308\\v14\\v61\\v10\\v12\\v47\\v47\\v48\\v14\\v13\\v9\\v10\\v25\\v14\\v48\\v10\\v3\\v10\\v46\\v9\\v18\\v14\\v20\\v21\\v14\\v37\\v9\\v11\\v61\\v9\\v11\\v310\\v14\\v37\\v12\\v11\\v6\\v24\\v25\\v14\\v11\\v9\\v37\\v24\\v9\\v12\\v25\\v37\\v14\\v26\\v37\\v14\\v19\\v4\\v4\\v24\\v40'")())
-v290:v83({
-v89 = v2("return '\\v34\\v309\\v47\\v6\\v24\\v14\\v54\\v6\\v25\\v12\\v13\\v156\\v4\\v11\\v57\\v14\\v27\\v8\\v19\\v4\\v25\\v14\\v84\\v35'")(),
-v140 = function()
-v68(function() v56.v221.v222 = v56.v221.v222 end)
-end,
-})
+    Header(ToolsTab, "Auto Tool Usage")
+    AddToggle(ToolsTab, "AutoUseTNT", "Auto Use TNT", false, "Light & throw TNT on cooldown")
+    AddToggle(ToolsTab, "AutoUsePitchfork", "Auto Use Pitchfork", false)
+    AddToggle(ToolsTab, "AutoDeployDrone", "Auto Deploy Drone", false)
+    AddToggle(ToolsTab, "AutoVacuum", "Auto Vacuum (Loop)", false)
+    AddSlider(ToolsTab, "ToolInterval", "Tool Interval (s)", 0.2, 5, 1, 0.1)
+
+    Header(ToolsTab, "Requirements")
+    Info(ToolsTab, "PitchforkOwned, TntOwned, DroneOwned, VacuumOwned required per tool.")
+    Info(ToolsTab, "TNT cooldown & vacuum heat managed by server; script respects 1s loop.")
+    ToolsTab:Button({
+        Title = "Equip Pitchfork (Slot 3)",
+        Callback = function()
+            pcall(function() Workspace.CurrentCamera.CFrame = Workspace.CurrentCamera.CFrame end)
+        end,
+    })
 end
+
 do
-v126(v291, v2("return '\\v17\\v9\\v9\\v18\\v19\\v9'")())
-v132(v291, v2("return '\\v28\\v47\\v25\\v4\\v15\\v6\\v3\\v18\\v17\\v9\\v9\\v18\\v19\\v9'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v15\\v6\\v3\\v18\\v14\\v17\\v9\\v9\\v18\\v19\\v9'")(), false, v2("return '\\v23\\v4\\v3\\v25\\v6\\v3\\v47\\v4\\v47\\v37\\v19\\v21\\v14\\v24\\v6\\v12\\v57\\v14\\v10\\v11\\v4\\v47\\v3\\v18\\v14\\v24\\v6\\v19\\v9\\v14\\v12\\v9\\v3\\v25\\v9\\v11\\v14\\v25\\v4\\v14\\v11\\v9\\v61\\v9\\v10\\v19\\v14\\v3\\v9\\v9\\v18\\v19\\v9'")())
-v132(v291, v2("return '\\v28\\v47\\v25\\v4\\v31\\v10\\v3\\v18\\v50\\v3\\v17\\v9\\v9\\v18\\v19\\v9'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v31\\v10\\v3\\v18\\v14\\v50\\v3\\v14\\v17\\v9\\v9\\v18\\v19\\v9'")(), false, v2("return '\\v15\\v6\\v11\\v9\\v37\\v14\\v17\\v9\\v9\\v18\\v19\\v9\\v31\\v10\\v3\\v18\\v50\\v3\\v14\\v51\\v13\\v9\\v3\\v14\\v3\\v9\\v10\\v11\\v14\\v17\\v54\\v23'")())
-v142(v291, v2("return '\\v17\\v9\\v9\\v18\\v19\\v9\\v50\\v3\\v25\\v9\\v11\\v61\\v10\\v19'")(), v2("return '\\v17\\v9\\v9\\v18\\v19\\v9\\v14\\v50\\v3\\v25\\v9\\v11\\v61\\v10\\v19\\v14\\v27\\v37\\v35'")(), 0.2, 3, 1, 0.1)
-v126(v291, v2("return '\\v31\\v4\\v51\\v14\\v17\\v9\\v9\\v18\\v19\\v9\\v14\\v49\\v4\\v11\\v57\\v37'")())
-v129(v291, v2("return '\\v17\\v9\\v9\\v18\\v19\\v9\\v14\\v37\\v24\\v10\\v51\\v3\\v37\\v14\\v47\\v3\\v18\\v9\\v11\\v14\\v13\\v10\\v21\\v40\\v14\\v29\\v9\\v48\\v4\\v61\\v6\\v3\\v46\\v14\\v13\\v10\\v21\\v14\\v11\\v9\\v61\\v9\\v10\\v19\\v37\\v14\\v6\\v25\\v40\\v14\\v31\\v10\\v3\\v18\\v14\\v6\\v3\\v14\\v10\\v25\\v14\\v156\\v10\\v11\\v48\\v9\\v11\\v40'")())
-v129(v291, v2("return '\\v54\\v6\\v19\\v9\\v14\\v12\\v9\\v3\\v25\\v9\\v11\\v14\\v156\\v11\\v4\\v48\\v14\\v23\\v4\\v3\\v156\\v6\\v46\\v40\\v54\\v50\\v298\\v34\\v313\\v23\\v34\\v17\\v16\\v34\\v29\\v14\\v47\\v37\\v9\\v18\\v14\\v156\\v4\\v11\\v14\\v10\\v47\\v25\\v4\\v48\\v10\\v25\\v6\\v4\\v3\\v40'")())
+    Header(NeedleTab, "Needle")
+    AddToggle(NeedleTab, "AutoFindNeedle", "Auto Find Needle", false, "Continuously pick around pile center to reveal needle")
+    AddToggle(NeedleTab, "AutoHandInNeedle", "Auto Hand In Needle", false, "Fires NeedleHandIn when near NPC")
+    AddSlider(NeedleTab, "NeedleInterval", "Needle Interval (s)", 0.2, 3, 1, 0.1)
+
+    Header(NeedleTab, "How Needle Works")
+    Info(NeedleTab, "Needle spawns under hay. Removing hay reveals it. Hand in at farmer.")
+    Info(NeedleTab, "Pile center from Config.PILE_CENTER used for automation.")
 end
+
 do
-v126(v293, v2("return '\\v54\\v47\\v11\\v12\\v13\\v10\\v37\\v6\\v3\\v46'")())
-v64.v314 = { v2("return '\\v54\\v6\\v25\\v12\\v13\\v156\\v4\\v11\\v57'")() }
-local v315 = v293:v316({
-v89 = v2("return '\\v159\\v47\\v21\\v14\\v16\\v4\\v4\\v19\\v37\\v14\\v8\\v9\\v19\\v9\\v12\\v25\\v6\\v4\\v3'")(),
-v317 = { v2("return '\\v54\\v6\\v25\\v12\\v13\\v156\\v4\\v11\\v57'")(), v2("return '\\v16\\v17\\v16'")(), v2("return '\\v67\\v11\\v4\\v3\\v9'")(), v2("return '\\v59\\v10\\v12\\v47\\v47\\v48'")(), v2("return '\\v50\\v3\\v156\\v6\\v3\\v6\\v25\\v9\\v14\\v159\\v10\\v46'")(), v2("return '\\v23\\v10\\v24\\v10\\v12\\v6\\v25\\v21\\v14\\v159\\v10\\v46'")() },
-v139 = { v2("return '\\v54\\v6\\v25\\v12\\v13\\v156\\v4\\v11\\v57'")() },
-v318 = true,
-v319 = true,
-v140 = function(v141) v64.v314 = v141 end,
-})
-v65.v314 = v315
-v132(v293, v2("return '\\v28\\v47\\v25\\v4\\v159\\v47\\v21\\v16\\v4\\v4\\v19\\v37'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v159\\v47\\v21\\v14\\v8\\v9\\v19\\v9\\v12\\v25\\v9\\v18\\v14\\v16\\v4\\v4\\v19\\v37'")(), false)
-v142(v293, v2("return '\\v159\\v47\\v21\\v50\\v3\\v25\\v9\\v11\\v61\\v10\\v19'")(), v2("return '\\v159\\v47\\v21\\v14\\v50\\v3\\v25\\v9\\v11\\v61\\v10\\v19\\v14\\v27\\v37\\v35'")(), 0.5, 5, 1, 0.1)
-v129(v293, v2("return '\\v54\\v6\\v25\\v12\\v13\\v156\\v4\\v11\\v57\\v312\\v16\\v3\\v25\\v312\\v67\\v11\\v4\\v3\\v9\\v312\\v59\\v10\\v12\\v47\\v47\\v48\\v312\\v50\\v3\\v156\\v6\\v3\\v6\\v25\\v9\\v159\\v10\\v46\\v14\\v61\\v6\\v10\\v14\\v159\\v47\\v21\\v8\\v13\\v4\\v24\\v50\\v25\\v9\\v48\\v40\\v14\\v23\\v10\\v24\\v10\\v12\\v6\\v25\\v21\\v14\\v159\\v10\\v46\\v14\\v61\\v6\\v10\\v14\\v159\\v47\\v21\\v33\\v24\\v46\\v11\\v10\\v18\\v9\\v38\\v23\\v10\\v24\\v10\\v12\\v6\\v25\\v21\\v40'")())
-v126(v293, v2("return '\\v32\\v51\\v3\\v9\\v11\\v37\\v13\\v6\\v24'")())
-v129(v293, v2("return '\\v32\\v51\\v3\\v9\\v11\\v37\\v13\\v6\\v24\\v14\\v10\\v25\\v25\\v11\\v6\\v20\\v47\\v25\\v9\\v37\\v38\\v14\\v54\\v6\\v25\\v12\\v13\\v156\\v4\\v11\\v57\\v32\\v51\\v3\\v9\\v18\\v307\\v14\\v16\\v3\\v25\\v32\\v51\\v3\\v9\\v18\\v307\\v14\\v67\\v11\\v4\\v3\\v9\\v32\\v51\\v3\\v9\\v18\\v307\\v14\\v59\\v10\\v12\\v47\\v47\\v48\\v32\\v51\\v3\\v9\\v18\\v307\\v14\\v50\\v3\\v156\\v6\\v3\\v6\\v25\\v9\\v159\\v10\\v46\\v32\\v51\\v3\\v9\\v18'")())
-v293:v83({
-v89 = v2("return '\\v23\\v13\\v9\\v12\\v57\\v14\\v32\\v51\\v3\\v9\\v11\\v37\\v13\\v6\\v24'")(),
-v140 = function()
-local v320 = {}
-for v193, v321 in v195({ v2("return '\\v54\\v6\\v25\\v12\\v13\\v156\\v4\\v11\\v57\\v32\\v51\\v3\\v9\\v18'")(), v2("return '\\v16\\v3\\v25\\v32\\v51\\v3\\v9\\v18'")(), v2("return '\\v67\\v11\\v4\\v3\\v9\\v32\\v51\\v3\\v9\\v18'")(), v2("return '\\v59\\v10\\v12\\v47\\v47\\v48\\v32\\v51\\v3\\v9\\v18'")(), v2("return '\\v50\\v3\\v156\\v6\\v3\\v6\\v25\\v9\\v159\\v10\\v46\\v32\\v51\\v3\\v9\\v18'")(), v2("return '\\v31\\v10\\v21\\v33\\v24\\v46\\v11\\v10\\v18\\v9\\v23\\v10\\v24\\v10\\v12\\v6\\v25\\v21'")() }) do
-v207.v208(v320, v321 .. v2("return '\\v38\\v14'")() .. v239(v62:v179(v321)))
+    Header(ShopTab, "Purchasing")
+    State.BuyToolsList = { "Pitchfork" }
+    local buyDropdown = ShopTab:Dropdown({
+        Title = "Buy Tools Selection",
+        Values = { "Pitchfork", "TNT", "Drone", "Vacuum", "Infinite Bag", "Capacity Bag" },
+        Value = { "Pitchfork" },
+        Multi = true,
+        AllowNone = true,
+        Callback = function(v) State.BuyToolsList = v end,
+    })
+    Registry.BuyToolsList = buyDropdown
+    AddToggle(ShopTab, "AutoBuyTools", "Auto Buy Selected Tools", false)
+    AddSlider(ShopTab, "BuyInterval", "Buy Interval (s)", 0.5, 5, 1, 0.1)
+    Info(ShopTab, "Pitchfork=Tnt=Drone=Vacuum=InfiniteBag via BuyShopItem. Capacity Bag via BuyUpgrade:Capacity.")
+
+    Header(ShopTab, "Ownership")
+    Info(ShopTab, "Ownership attributes: PitchforkOwned, TntOwned, DroneOwned, VacuumOwned, InfiniteBagOwned")
+    ShopTab:Button({
+        Title = "Check Ownership",
+        Callback = function()
+            local t = {}
+            for _, k in ipairs({ "PitchforkOwned", "TntOwned", "DroneOwned", "VacuumOwned", "InfiniteBagOwned", "HayUpgradeCapacity" }) do
+                table.insert(t, k .. ": " .. tostring(LocalPlayer:GetAttribute(k)))
+            end
+            Notify("Ownership", table.concat(t, "\n"), 4)
+        end,
+    })
 end
-v119(v2("return '\\v32\\v51\\v3\\v9\\v11\\v37\\v13\\v6\\v24'")(), v207.v322(v320, v2("return '\\v323\\v3'")()), 4)
-end,
-})
-end
+
 do
-v126(v294, v2("return '\\v54\\v9\\v11\\v48\\v10\\v3\\v9\\v3\\v25\\v14\\v27\\v165\\v9\\v48\\v37\\v35'")())
-v132(v294, v2("return '\\v33\\v24\\v46\\v159\\v10\\v46\\v8\\v6\\v296\\v9'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v33\\v24\\v46\\v11\\v10\\v18\\v9\\v14\\v159\\v10\\v46\\v14\\v8\\v6\\v296\\v9'")(), false, v2("return '\\v34\\v5\\v25\\v11\\v10\\v31\\v4\\v19\\v18\\v28\\v48\\v4\\v47\\v3\\v25\\v14\\v281\\v311\\v14\\v165\\v9\\v48\\v37\\v14\\v73\\v78\\v307\\v78\\v82\\v307\\v324\\v78\\v307\\v26\\v82\\v82\\v307\\v26\\v78\\v82\\v307\\v325\\v78\\v82'")())
-v132(v294, v2("return '\\v33\\v24\\v46\\v34\\v5\\v25\\v11\\v10\\v16\\v10\\v57\\v9'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v33\\v24\\v46\\v11\\v10\\v18\\v9\\v14\\v31\\v10\\v3\\v18\\v14\\v165\\v11\\v10\\v20\\v14\\v28\\v48\\v4\\v47\\v3\\v25'")(), false, v2("return '\\v34\\v5\\v25\\v11\\v10\\v16\\v10\\v57\\v9\\v28\\v48\\v4\\v47\\v3\\v25\\v14\\v165\\v9\\v48\\v37'")())
-v132(v294, v2("return '\\v33\\v24\\v46\\v165\\v9\\v48\\v59\\v10\\v19\\v47\\v9'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v33\\v24\\v46\\v11\\v10\\v18\\v9\\v14\\v165\\v9\\v48\\v14\\v59\\v10\\v19\\v47\\v9'")(), false)
-v132(v294, v2("return '\\v33\\v24\\v46\\v31\\v10\\v21\\v59\\v10\\v19\\v47\\v9'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v33\\v24\\v46\\v11\\v10\\v18\\v9\\v14\\v31\\v10\\v21\\v14\\v59\\v10\\v19\\v47\\v9'")(), false)
-v142(v294, v2("return '\\v54\\v9\\v11\\v48\\v50\\v3\\v25\\v9\\v11\\v61\\v10\\v19'")(), v2("return '\\v54\\v9\\v11\\v48\\v10\\v3\\v9\\v3\\v25\\v14\\v298\\v4\\v4\\v24\\v14\\v27\\v37\\v35'")(), 0.5, 5, 1, 0.1)
-v129(v294, v2("return '\\v23\\v47\\v11\\v11\\v9\\v3\\v12\\v21\\v38\\v14\\v165\\v9\\v48\\v37\\v40\\v14\\v54\\v9\\v11\\v48\\v10\\v3\\v9\\v3\\v25\\v14\\v19\\v4\\v20\\v20\\v21\\v14\\v48\\v47\\v19\\v25\\v6\\v24\\v19\\v6\\v9\\v11\\v40'")())
-v126(v294, v2("return '\\v31\\v10\\v3\\v18\\v14\\v33\\v24\\v46\\v11\\v10\\v18\\v9\\v37\\v14\\v27\\v23\\v10\\v37\\v13\\v35'")())
-v132(v294, v2("return '\\v33\\v24\\v46\\v31\\v10\\v3\\v18\\v8\\v24\\v9\\v9\\v18'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v31\\v10\\v3\\v18\\v14\\v8\\v24\\v9\\v9\\v18'")(), false, v2("return '\\v8\\v24\\v9\\v9\\v18\\v14\\v25\\v11\\v10\\v12\\v57\\v14\\v82\\v40\\v78\\v78\\v281\\v311\\v82\\v40\\v84'")())
-v132(v294, v2("return '\\v33\\v24\\v46\\v31\\v10\\v3\\v18\\v165\\v11\\v10\\v20'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v31\\v10\\v3\\v18\\v14\\v165\\v11\\v10\\v37\\v24'")(), false)
-v132(v294, v2("return '\\v33\\v24\\v46\\v31\\v10\\v3\\v18\\v31\\v4\\v19\\v18'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v31\\v10\\v3\\v18\\v14\\v31\\v4\\v19\\v18'")(), false)
-v126(v294, v2("return '\\v16\\v17\\v16\\v14\\v33\\v24\\v46\\v11\\v10\\v18\\v9\\v37'")())
-v132(v294, v2("return '\\v33\\v24\\v46\\v16\\v3\\v25\\v298\\v47\\v12\\v57'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v16\\v17\\v16\\v14\\v298\\v47\\v12\\v57\\v21\\v14\\v159\\v19\\v10\\v37\\v25'")(), false)
-v132(v294, v2("return '\\v33\\v24\\v46\\v16\\v3\\v25\\v23\\v4\\v4\\v19\\v18\\v4\\v51\\v3'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v16\\v17\\v16\\v14\\v23\\v4\\v4\\v19\\v18\\v4\\v51\\v3'")(), false)
-v132(v294, v2("return '\\v33\\v24\\v46\\v16\\v3\\v25\\v54\\v4\\v51\\v9\\v11'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v16\\v17\\v16\\v14\\v54\\v4\\v51\\v9\\v11'")(), false)
-v126(v294, v2("return '\\v54\\v6\\v25\\v12\\v13\\v156\\v4\\v11\\v57\\v14\\v33\\v24\\v46\\v11\\v10\\v18\\v9\\v37'")())
-v132(v294, v2("return '\\v33\\v24\\v46\\v54\\v6\\v25\\v12\\v13\\v23\\v4\\v4\\v19\\v18\\v4\\v51\\v3'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v54\\v6\\v25\\v12\\v13\\v156\\v4\\v11\\v57\\v14\\v23\\v4\\v4\\v19\\v18\\v4\\v51\\v3'")(), false)
-v132(v294, v2("return '\\v33\\v24\\v46\\v54\\v6\\v25\\v12\\v13\\v31\\v4\\v19\\v18'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v54\\v6\\v25\\v12\\v13\\v156\\v4\\v11\\v57\\v14\\v31\\v4\\v19\\v18'")(), false)
-v132(v294, v2("return '\\v33\\v24\\v46\\v54\\v6\\v25\\v12\\v13\\v8\\v51\\v9\\v9\\v24'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v54\\v6\\v25\\v12\\v13\\v156\\v4\\v11\\v57\\v14\\v8\\v51\\v9\\v9\\v24'")(), false)
-v126(v294, v2("return '\\v67\\v11\\v4\\v3\\v9\\v14\\v33\\v24\\v46\\v11\\v10\\v18\\v9\\v37'")())
-v132(v294, v2("return '\\v33\\v24\\v46\\v67\\v11\\v4\\v3\\v9\\v8\\v24\\v9\\v9\\v18'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v67\\v11\\v4\\v3\\v9\\v14\\v8\\v24\\v9\\v9\\v18'")(), false)
-v132(v294, v2("return '\\v33\\v24\\v46\\v67\\v11\\v4\\v3\\v9\\v165\\v11\\v10\\v20'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v67\\v11\\v4\\v3\\v9\\v14\\v165\\v11\\v10\\v37\\v24'")(), false)
-v132(v294, v2("return '\\v33\\v24\\v46\\v67\\v11\\v4\\v3\\v9\\v23\\v10\\v24\\v10\\v12\\v6\\v25\\v21'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v67\\v11\\v4\\v3\\v9\\v14\\v23\\v10\\v24\\v10\\v12\\v6\\v25\\v21'")(), false)
-v126(v294, v2("return '\\v59\\v10\\v12\\v47\\v47\\v48\\v14\\v33\\v24\\v46\\v11\\v10\\v18\\v9\\v37'")())
-v132(v294, v2("return '\\v33\\v24\\v46\\v59\\v10\\v12\\v54\\v4\\v51\\v9\\v11'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v59\\v10\\v12\\v47\\v47\\v48\\v14\\v54\\v4\\v51\\v9\\v11'")(), false)
-v132(v294, v2("return '\\v33\\v24\\v46\\v59\\v10\\v12\\v23\\v4\\v4\\v19\\v6\\v3\\v46'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v59\\v10\\v12\\v47\\v47\\v48\\v14\\v23\\v4\\v4\\v19\\v6\\v3\\v46'")(), false)
-v132(v294, v2("return '\\v33\\v24\\v46\\v59\\v10\\v12\\v29\\v47\\v3\\v25\\v6\\v48\\v9'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v59\\v10\\v12\\v47\\v47\\v48\\v14\\v29\\v47\\v3\\v25\\v6\\v48\\v9'")(), false)
-v126(v294, v2("return '\\v23\\v10\\v24\\v10\\v12\\v6\\v25\\v21'")())
-v132(v294, v2("return '\\v33\\v24\\v46\\v23\\v10\\v24\\v10\\v12\\v6\\v25\\v21'")(), v2("return '\\v28\\v47\\v25\\v4\\v14\\v33\\v24\\v46\\v11\\v10\\v18\\v9\\v14\\v23\\v10\\v11\\v11\\v21\\v14\\v23\\v10\\v24\\v10\\v12\\v6\\v25\\v21'")(), false, v2("return '\\v73\\v78\\v281\\v311\\v73\\v78\\v82\\v14\\v12\\v10\\v37\\v13\\v14\\v47\\v24\\v46\\v11\\v10\\v18\\v9\\v37'")())
-v129(v294, v2("return '\\v23\\v10\\v37\\v13\\v14\\v47\\v24\\v46\\v11\\v10\\v18\\v9\\v37\\v38\\v14\\v47\\v37\\v9\\v14\\v159\\v47\\v21\\v33\\v24\\v46\\v11\\v10\\v18\\v9\\v14\\v51\\v6\\v25\\v13\\v14\\v25\\v11\\v10\\v12\\v57\\v14\\v3\\v10\\v48\\v9\\v37\\v40\\v14\\v23\\v13\\v9\\v12\\v57\\v14\\v10\\v156\\v156\\v4\\v11\\v18\\v10\\v20\\v6\\v19\\v6\\v25\\v21\\v14\\v61\\v6\\v10\\v14\\v46\\v9\\v25\\v23\\v10\\v37\\v13\\v27\\v35\\v40'")())
+    Header(UpgradesTab, "Permanent (Gems)")
+    AddToggle(UpgradesTab, "UpgBagSize", "Auto Upgrade Bag Size", false, "ExtraHoldAmount -> Gems 25,50,75,100,150,450")
+    AddToggle(UpgradesTab, "UpgExtraTake", "Auto Upgrade Hand Grab Amount", false, "ExtraTakeAmount Gems")
+    AddToggle(UpgradesTab, "UpgGemValue", "Auto Upgrade Gem Value", false)
+    AddToggle(UpgradesTab, "UpgHayValue", "Auto Upgrade Hay Value", false)
+    AddSlider(UpgradesTab, "PermInterval", "Permanent Loop (s)", 0.5, 5, 1, 0.1)
+    Info(UpgradesTab, "Currency: Gems. Permanent lobby multiplier.")
+
+    Header(UpgradesTab, "Hand Upgrades (Cash)")
+    AddToggle(UpgradesTab, "UpgHandSpeed", "Auto Hand Speed", false, "Speed track 0.55->0.3")
+    AddToggle(UpgradesTab, "UpgHandGrab", "Auto Hand Grasp", false)
+    AddToggle(UpgradesTab, "UpgHandHold", "Auto Hand Hold", false)
+
+    Header(UpgradesTab, "TNT Upgrades")
+    AddToggle(UpgradesTab, "UpgTntLuck", "Auto TNT Lucky Blast", false)
+    AddToggle(UpgradesTab, "UpgTntCooldown", "Auto TNT Cooldown", false)
+    AddToggle(UpgradesTab, "UpgTntPower", "Auto TNT Power", false)
+
+    Header(UpgradesTab, "Pitchfork Upgrades")
+    AddToggle(UpgradesTab, "UpgPitchCooldown", "Auto Pitchfork Cooldown", false)
+    AddToggle(UpgradesTab, "UpgPitchHold", "Auto Pitchfork Hold", false)
+    AddToggle(UpgradesTab, "UpgPitchSweep", "Auto Pitchfork Sweep", false)
+
+    Header(UpgradesTab, "Drone Upgrades")
+    AddToggle(UpgradesTab, "UpgDroneSpeed", "Auto Drone Speed", false)
+    AddToggle(UpgradesTab, "UpgDroneGrab", "Auto Drone Grasp", false)
+    AddToggle(UpgradesTab, "UpgDroneCapacity", "Auto Drone Capacity", false)
+
+    Header(UpgradesTab, "Vacuum Upgrades")
+    AddToggle(UpgradesTab, "UpgVacPower", "Auto Vacuum Power", false)
+    AddToggle(UpgradesTab, "UpgVacCooling", "Auto Vacuum Cooling", false)
+    AddToggle(UpgradesTab, "UpgVacRuntime", "Auto Vacuum Runtime", false)
+
+    Header(UpgradesTab, "Capacity")
+    AddToggle(UpgradesTab, "UpgCapacity", "Auto Upgrade Carry Capacity", false, "25->250 cash upgrades")
+    Info(UpgradesTab, "Cash upgrades: use BuyUpgrade with track names. Check affordability via getCash().")
 end
+
 do
-v126(v295, v2("return '\\v30\\v9\\v3\\v47'")())
-v295:v326({
-v89 = v2("return '\\v30\\v9\\v3\\v47\\v14\\v57\\v9\\v21\\v20\\v6\\v3\\v18'")(),
-v139 = v2("return '\\v29\\v6\\v46\\v13\\v25\\v8\\v13\\v6\\v156\\v25'")(),
-v140 = function(v141)
-v68(function()
-local v133 = v327(v141) == v2("return '\\v34\\v3\\v47\\v48\\v50\\v25\\v9\\v48'")() and v141 or v102.v103[v141]
-v87:v101(v133)
+
+    Header(SettingsTab, "Menu")
+    SettingsTab:Keybind({
+        Title = "Menu keybind",
+        Value = "RightShift",
+        Callback = function(v)
+            pcall(function()
+                local key = typeof(v) == "EnumItem" and v or Enum.KeyCode[v]
+                Window:SetToggleKey(key)
+            end)
+        end,
+    })
+
+    pcall(function()
+        local names = {}
+        for name in pairs(WindUI:GetThemes()) do table.insert(names, name) end
+        table.sort(names)
+        if #names > 0 then
+            SettingsTab:Dropdown({
+                Title = "Theme",
+                Values = names,
+                Value = ThemeName,
+                Callback = function(v) pcall(function() WindUI:SetTheme(v) end) end,
+            })
+        end
+    end)
+
+    if typeof(Window.ToggleTransparency) == "function" then
+        SettingsTab:Toggle({
+            Title = "Transparency",
+            Value = false,
+            Callback = function(v) pcall(function() Window:ToggleTransparency(v) end) end,
+        })
+    end
+
+    if typeof(Window.SetUIScale) == "function" then
+        SettingsTab:Slider({
+            Title = "DPI Scale (%)",
+            Step = 1,
+            Value = { Min = 50, Max = 200, Default = 100 },
+            Callback = function(v) pcall(function() Window:SetUIScale((tonumber(v) or 100) / 100) end) end,
+        })
+    end
+
+    SettingsTab:Button({
+        Title = "Unload",
+        Callback = function()
+            doUnload()
+            pcall(function() Window:Destroy() end)
+        end,
+    })
+
+    Header(SettingsTab, "System")
+    AddToggle(SettingsTab, "AntiAFK", "Anti-AFK (jump every 5m)", true, "Enabled by default. Uses jump to keep alive.")
+    AddToggle(SettingsTab, "AutoRejoin", "Notify On Rejoin", false)
+
+    Header(SettingsTab, "Config")
+    local configName = "default"
+
+    local function buildConfig(name)
+        local cfg = ConfigManager:CreateConfig(name)
+        for key, el in pairs(Registry) do
+            cfg:Register(key, el)
+        end
+        return cfg
+    end
+
+    local function listConfigs()
+        local out = {}
+        pcall(function()
+            for _, n in ipairs(ConfigManager:AllConfigs()) do
+                table.insert(out, (tostring(n):gsub("%.json$", "")))
+            end
+        end)
+        if #out == 0 then out = { "default" } end
+        return out
+    end
+
+    if ConfigManager then
+        SettingsTab:Input({
+            Title = "Config Name",
+            Desc = "Save as 'default' to auto-load on start.",
+            Value = configName,
+            Placeholder = "default",
+            Callback = function(v)
+                if v and v ~= "" then configName = v end
+            end,
+        })
+
+        local configDropdown = SettingsTab:Dropdown({
+            Title = "Saved Configs",
+            Values = listConfigs(),
+            Value = "default",
+            Callback = function(v) configName = v end,
+        })
+
+        SettingsTab:Button({
+            Title = "Save Config",
+            Callback = function()
+                local ok, err = pcall(function() buildConfig(configName):Save() end)
+                if ok then
+                    Notify("Config", "Saved: " .. configName, 2, "check")
+                    pcall(function() configDropdown:Refresh(listConfigs()) end)
+                else
+                    Notify("Config", "Save failed: " .. tostring(err), 3, "x")
+                end
+            end,
+        })
+
+        SettingsTab:Button({
+            Title = "Load Config",
+            Callback = function()
+                local ok, err = pcall(function() buildConfig(configName):Load() end)
+                if ok then
+                    Notify("Config", "Loaded: " .. configName, 2, "check")
+                else
+                    Notify("Config", "Load failed: " .. tostring(err), 3, "x")
+                end
+            end,
+        })
+
+        SettingsTab:Button({
+            Title = "Refresh Config List",
+            Callback = function()
+                pcall(function() configDropdown:Refresh(listConfigs()) end)
+            end,
+        })
+    else
+        Info(SettingsTab, "Config manager is not available in this WindUI build.")
+    end
+end
+
+task.spawn(function()
+    while true do
+        task.wait(waitInterval("CollectInterval", 1))
+        if Unloaded then break end
+        if State.AutoPickHay then
+            if not isBagFull() then
+                local hay = findClosestHay()
+                if not hay then
+                    ensureNearPileForPick()
+                    hay = findClosestHay()
+                end
+                if hay then
+                    teleportToPart(hay, 4)
+                    local id = hay:GetAttribute("HayId")
+                    if id then
+                        local candidates = getGrabCandidates(hay)
+                        pcall(function() PickHay:FireServer(id, candidates) end)
+                    else
+                        pcall(function() PickDroppedHay:FireServer(hay) end)
+                    end
+                else
+                    ensureNearPileForPick()
+                end
+            end
+        end
+    end
 end)
-end,
-})
-v68(function()
-local v328 = {}
-for v329 in v330(v42:v331()) do v207.v208(v328, v329) end
-v207.v332(v328)
-if #v328 > 0 then
-v295:v316({
-v89 = v2("return '\\v16\\v13\\v9\\v48\\v9'")(),
-v317 = v328,
-v139 = v66,
-v140 = function(v141) v68(function() v42:v333(v141) end) end,
-})
-end
+
+task.spawn(function()
+    while true do
+        task.wait(waitInterval("CollectInterval", 1))
+        if Unloaded then break end
+        if State.AutoCollectDroppedHay then
+            if not isBagFull() then
+                local d = findClosestDropped()
+                if not d then
+                    ensureNearPileForPick()
+                    d = findClosestDropped()
+                end
+                if d then
+                    local part = d:IsA("BasePart") and d or d:FindFirstChildWhichIsA("BasePart")
+                    if part then teleportToPart(part, 3) end
+                    pcall(function() PickDroppedHay:FireServer(d) end)
+                end
+            end
+        end
+    end
 end)
-if v327(v87.v334) == v2("return '\\v156\\v47\\v3\\v12\\v25\\v6\\v4\\v3'")() then
-v295:v137({
-v89 = v2("return '\\v16\\v11\\v10\\v3\\v37\\v24\\v10\\v11\\v9\\v3\\v12\\v21'")(),
-v139 = false,
-v140 = function(v141) v68(function() v87:v334(v141) end) end,
-})
-end
-if v327(v87.v335) == v2("return '\\v156\\v47\\v3\\v12\\v25\\v6\\v4\\v3'")() then
-v295:v146({
-v89 = v2("return '\\v67\\v54\\v50\\v14\\v8\\v12\\v10\\v19\\v9\\v14\\v27\\v304\\v35'")(),
-v147 = 1,
-v139 = { v148 = 50, v149 = 200, v150 = 100 },
-v140 = function(v141) v68(function() v87:v335((v151(v141) or 100) / 100) end) end,
-})
-end
-v295:v83({
-v89 = v2("return '\\v33\\v3\\v19\\v4\\v10\\v18'")(),
-v140 = function()
-v277()
-v68(function() v87:v336() end)
-end,
-})
-v126(v295, v2("return '\\v8\\v21\\v37\\v25\\v9\\v48'")())
-v132(v295, v2("return '\\v28\\v3\\v25\\v6\\v28\\v15\\v92'")(), v2("return '\\v28\\v3\\v25\\v6\\v281\\v28\\v15\\v92\\v14\\v27\\v337\\v47\\v48\\v24\\v14\\v9\\v61\\v9\\v11\\v21\\v14\\v78\\v48\\v35'")(), true, v2("return '\\v34\\v3\\v10\\v20\\v19\\v9\\v18\\v14\\v20\\v21\\v14\\v18\\v9\\v156\\v10\\v47\\v19\\v25\\v40\\v14\\v33\\v37\\v9\\v37\\v14\\v337\\v47\\v48\\v24\\v14\\v25\\v4\\v14\\v57\\v9\\v9\\v24\\v14\\v10\\v19\\v6\\v61\\v9\\v40'")())
-v132(v295, v2("return '\\v28\\v47\\v25\\v4\\v29\\v9\\v337\\v4\\v6\\v3'")(), v2("return '\\v17\\v4\\v25\\v6\\v156\\v21\\v14\\v32\\v3\\v14\\v29\\v9\\v337\\v4\\v6\\v3'")(), false)
-v126(v295, v2("return '\\v23\\v4\\v3\\v156\\v6\\v46'")())
-local v338 = v2("return '\\v18\\v9\\v156\\v10\\v47\\v19\\v25'")()
-local function v339(v329)
-local v340 = v118:v341(v329)
-for v133, v136 in v330(v65) do
-v340:v342(v133, v136)
-end
-return v340
-end
-local function v343()
-local v205 = {}
-v68(function()
-for v193, v344 in v195(v118:v345()) do
-v207.v208(v205, (v239(v344):v346(v2("return '\\v304\\v40\\v337\\v37\\v4\\v3\\v306'")(), v2("return ''")())))
-end
+
+task.spawn(function()
+    while true do
+        task.wait(waitInterval("CollectInterval", 1))
+        if Unloaded then break end
+        if State.AutoCollectGems then
+            local gemPart, id = findClosestGem()
+            if not gemPart then
+                ensureNearPileForPick()
+                gemPart, id = findClosestGem()
+            end
+            if gemPart and id then
+                teleportToPart(gemPart, 3)
+                pcall(function() CollectGem:FireServer(id) end)
+            end
+        end
+    end
 end)
-if #v205 == 0 then v205 = { v2("return '\\v18\\v9\\v156\\v10\\v47\\v19\\v25'")() } end
-return v205
-end
-if v118 then
-v295:v347({
-v89 = v2("return '\\v23\\v4\\v3\\v156\\v6\\v46\\v14\\v17\\v10\\v48\\v9'")(),
-v138 = v2("return '\\v8\\v10\\v61\\v9\\v14\\v10\\v37\\v14\\v348\\v18\\v9\\v156\\v10\\v47\\v19\\v25\\v348\\v14\\v25\\v4\\v14\\v10\\v47\\v25\\v4\\v281\\v19\\v4\\v10\\v18\\v14\\v4\\v3\\v14\\v37\\v25\\v10\\v11\\v25\\v40'")(),
-v139 = v338,
-v80 = v2("return '\\v18\\v9\\v156\\v10\\v47\\v19\\v25'")(),
-v140 = function(v141)
-if v141 and v141 ~= v2("return ''")() then v338 = v141 end
-end,
-})
-local v349 = v295:v316({
-v89 = v2("return '\\v8\\v10\\v61\\v9\\v18\\v14\\v23\\v4\\v3\\v156\\v6\\v46\\v37'")(),
-v317 = v343(),
-v139 = v2("return '\\v18\\v9\\v156\\v10\\v47\\v19\\v25'")(),
-v140 = function(v141) v338 = v141 end,
-})
-v295:v83({
-v89 = v2("return '\\v8\\v10\\v61\\v9\\v14\\v23\\v4\\v3\\v156\\v6\\v46'")(),
-v140 = function()
-local v236, v237 = v68(function() v339(v338):v350() end)
-if v236 then
-v119(v2("return '\\v23\\v4\\v3\\v156\\v6\\v46'")(), v2("return '\\v8\\v10\\v61\\v9\\v18\\v38\\v14'")() .. v338, 2, v2("return '\\v12\\v13\\v9\\v12\\v57'")())
-v68(function() v349:v351(v343()) end)
-else
-v119(v2("return '\\v23\\v4\\v3\\v156\\v6\\v46'")(), v2("return '\\v8\\v10\\v61\\v9\\v14\\v156\\v10\\v6\\v19\\v9\\v18\\v38\\v14'")() .. v239(v237), 3, v2("return '\\v5'")())
-end
-end,
-})
-v295:v83({
-v89 = v2("return '\\v298\\v4\\v10\\v18\\v14\\v23\\v4\\v3\\v156\\v6\\v46'")(),
-v140 = function()
-local v236, v237 = v68(function() v339(v338):v352() end)
-if v236 then
-v119(v2("return '\\v23\\v4\\v3\\v156\\v6\\v46'")(), v2("return '\\v298\\v4\\v10\\v18\\v9\\v18\\v38\\v14'")() .. v338, 2, v2("return '\\v12\\v13\\v9\\v12\\v57'")())
-else
-v119(v2("return '\\v23\\v4\\v3\\v156\\v6\\v46'")(), v2("return '\\v298\\v4\\v10\\v18\\v14\\v156\\v10\\v6\\v19\\v9\\v18\\v38\\v14'")() .. v239(v237), 3, v2("return '\\v5'")())
-end
-end,
-})
-v295:v83({
-v89 = v2("return '\\v29\\v9\\v156\\v11\\v9\\v37\\v13\\v14\\v23\\v4\\v3\\v156\\v6\\v46\\v14\\v298\\v6\\v37\\v25'")(),
-v140 = function()
-v68(function() v349:v351(v343()) end)
-end,
-})
-else
-v129(v295, v2("return '\\v23\\v4\\v3\\v156\\v6\\v46\\v14\\v48\\v10\\v3\\v10\\v46\\v9\\v11\\v14\\v6\\v37\\v14\\v3\\v4\\v25\\v14\\v10\\v61\\v10\\v6\\v19\\v10\\v20\\v19\\v9\\v14\\v6\\v3\\v14\\v25\\v13\\v6\\v37\\v14\\v49\\v6\\v3\\v18\\v33\\v50\\v14\\v20\\v47\\v6\\v19\\v18\\v40'")())
-end
-end
-v234.v240(function()
-while true do
-v234.v235(v254(v2("return '\\v23\\v4\\v19\\v19\\v9\\v12\\v25\\v50\\v3\\v25\\v9\\v11\\v61\\v10\\v19'")(), 1))
-if v63 then break end
-if v64.v243 then
-if not v218() then
-local v353 = v187()
-if not v353 then
-v257()
-v353 = v187()
-end
-if v353 then
-v259(v353, 4)
-local v271 = v353:v179(v2("return '\\v31\\v10\\v21\\v50\\v18'")())
-if v271 then
-local v354 = v202(v353)
-v68(function() v161:v238(v271, v354) end)
-else
-v68(function() v162:v238(v353) end)
-end
-else
-v257()
-end
-end
-end
-end
+
+task.spawn(function()
+    while true do
+        task.wait(1)
+        if Unloaded then break end
+        if State.AutoSellHay then
+            local held = getHayHeld()
+            local thresh = tonumber(State.SellThreshold) or 25
+            local should
+            if State.SellOnlyIfFull then
+                should = isBagFull()
+            else
+                should = held >= thresh
+            end
+            if should and held > 0 then trySell() end
+        end
+    end
 end)
-v234.v240(function()
-while true do
-v234.v235(v254(v2("return '\\v23\\v4\\v19\\v19\\v9\\v12\\v25\\v50\\v3\\v25\\v9\\v11\\v61\\v10\\v19'")(), 1))
-if v63 then break end
-if v64.v244 then
-if not v218() then
-local v199 = v209()
-if not v199 then
-v257()
-v199 = v209()
-end
-if v199 then
-local v212 = v199:v197(v2("return '\\v159\\v10\\v37\\v9\\v54\\v10\\v11\\v25'")()) and v199 or v199:v213(v2("return '\\v159\\v10\\v37\\v9\\v54\\v10\\v11\\v25'")())
-if v212 then v259(v212, 3) end
-v68(function() v162:v238(v199) end)
-end
-end
-end
-end
-end)
-v234.v240(function()
-while true do
-v234.v235(v254(v2("return '\\v23\\v4\\v19\\v19\\v9\\v12\\v25\\v50\\v3\\v25\\v9\\v11\\v61\\v10\\v19'")(), 1))
-if v63 then break end
-if v64.v245 then
-local v355, v271 = v214()
-if not v355 then
-v257()
-v355, v271 = v214()
-end
-if v355 and v271 then
-v259(v355, 3)
-v68(function() v164:v238(v271) end)
-end
-end
-end
-end)
-v234.v240(function()
-while true do
-v234.v235(1)
-if v63 then break end
-if v64.v356 then
-local v357 = v180()
-local v358 = v151(v64.v359) or 25
-local v360
-if v64.v361 then
-v360 = v218()
-else
-v360 = v357 >= v358
-end
-if v360 and v357 > 0 then v230() end
-end
-end
-end)
+
 do
-local v362 = false
-v234.v240(function()
-while true do
-v234.v235(v254(v2("return '\\v23\\v4\\v19\\v19\\v9\\v12\\v25\\v50\\v3\\v25\\v9\\v11\\v61\\v10\\v19'")(), 1))
-if v63 then break end
-local v360 = v64.v246 or v64.v247
-if v360 and v182(v2("return '\\v59\\v10\\v12\\v47\\v47\\v48\\v32\\v51\\v3\\v9\\v18'")()) then
-if not v362 and not v218() then
-local v353 = v187()
-if not v353 then v257() v353 = v187() end
-if v353 then v259(v353, 5) end
-v68(function() v169:v238(v2("return '\\v8\\v25\\v10\\v11\\v25'")()) end)
-v362 = true
-elseif v218() and v362 then
-v68(function() v169:v238(v2("return '\\v8\\v25\\v4\\v24'")()) end)
-v362 = false
-v230()
+    local vacActive = false
+    task.spawn(function()
+        while true do
+            task.wait(waitInterval("CollectInterval", 1))
+            if Unloaded then break end
+            local should = State.AutoVacuumCollect or State.AutoVacuum
+            if should and owns("VacuumOwned") then
+                if not vacActive and not isBagFull() then
+
+                    local hay = findClosestHay()
+                    if not hay then ensureNearPileForPick() hay = findClosestHay() end
+                    if hay then teleportToPart(hay, 5) end
+                    pcall(function() VacuumAction:FireServer("Start") end)
+                    vacActive = true
+                elseif isBagFull() and vacActive then
+                    pcall(function() VacuumAction:FireServer("Stop") end)
+                    vacActive = false
+                    trySell()
+                end
+            else
+                if vacActive then
+                    pcall(function() VacuumAction:FireServer("Stop") end)
+                    vacActive = false
+                end
+            end
+
+            if vacActive and LocalPlayer:GetAttribute("VacuumOverheated") then
+                pcall(function() VacuumAction:FireServer("Stop") end)
+                vacActive = false
+                task.wait(0.5)
+                ensureNearPileForPick()
+            end
+        end
+    end)
 end
-else
-if v362 then
-v68(function() v169:v238(v2("return '\\v8\\v25\\v4\\v24'")()) end)
-v362 = false
-end
-end
-if v362 and v62:v179(v2("return '\\v59\\v10\\v12\\v47\\v47\\v48\\v32\\v61\\v9\\v11\\v13\\v9\\v10\\v25\\v9\\v18'")()) then
-v68(function() v169:v238(v2("return '\\v8\\v25\\v4\\v24'")()) end)
-v362 = false
-v234.v235(0.5)
-v257()
-end
-end
+
+task.spawn(function()
+    while true do
+        task.wait(waitInterval("ToolInterval", 1))
+        if Unloaded then break end
+        if State.AutoUseTNT and owns("TntOwned") then
+            local ok = not LocalPlayer:GetAttribute("NeedleInputLocked")
+            if ok then
+                pcall(function() TntAction:FireServer("light") end)
+                task.wait(0.4)
+                local cam = Workspace.CurrentCamera
+                if cam then
+                    local dir = cam.CFrame.LookVector * 40 + Vector3.new(0, 8, 0)
+                    local cf = cam.CFrame
+                    pcall(function() TntAction:FireServer("throw", cf, dir) end)
+                end
+            end
+        end
+    end
 end)
-end
-v234.v240(function()
-while true do
-v234.v235(v254(v2("return '\\v16\\v4\\v4\\v19\\v50\\v3\\v25\\v9\\v11\\v61\\v10\\v19'")(), 1))
-if v63 then break end
-if v64.v363 and v182(v2("return '\\v16\\v3\\v25\\v32\\v51\\v3\\v9\\v18'")()) then
-local v236 = not v62:v179(v2("return '\\v17\\v9\\v9\\v18\\v19\\v9\\v50\\v3\\v24\\v47\\v25\\v298\\v4\\v12\\v57\\v9\\v18'")())
-if v236 then
-v68(function() v168:v238(v2("return '\\v19\\v6\\v46\\v13\\v25'")()) end)
-v234.v235(0.4)
-local v364 = v56.v221
-if v364 then
-local v365 = v364.v222.v366 * 40 + v224.v108(0, 8, 0)
-local v367 = v364.v222
-v68(function() v168:v238(v2("return '\\v25\\v13\\v11\\v4\\v51'")(), v367, v365) end)
-end
-end
-end
-end
+
+task.spawn(function()
+    while true do
+        task.wait(waitInterval("ToolInterval", 1))
+        if Unloaded then break end
+        if State.AutoUsePitchfork and owns("PitchforkOwned") then
+            local hay = findClosestHay()
+            if not hay then ensureNearPileForPick() hay = findClosestHay() end
+            if hay then teleportToPart(hay, 4) end
+            local id = hay and hay:GetAttribute("HayId")
+            if id then
+                pcall(function() PitchforkDig:FireServer(id) end)
+            else
+                local fakeId = LocalPlayer:GetAttribute("HoveredHayId")
+                if fakeId then
+
+                    ensureNearPileForPick()
+                    pcall(function() PitchforkDig:FireServer(fakeId) end)
+                end
+            end
+        end
+    end
 end)
-v234.v240(function()
-while true do
-v234.v235(v254(v2("return '\\v16\\v4\\v4\\v19\\v50\\v3\\v25\\v9\\v11\\v61\\v10\\v19'")(), 1))
-if v63 then break end
-if v64.v248 and v182(v2("return '\\v54\\v6\\v25\\v12\\v13\\v156\\v4\\v11\\v57\\v32\\v51\\v3\\v9\\v18'")()) then
-local v353 = v187()
-if not v353 then v257() v353 = v187() end
-if v353 then v259(v353, 4) end
-local v271 = v353 and v353:v179(v2("return '\\v31\\v10\\v21\\v50\\v18'")())
-if v271 then
-v68(function() v167:v238(v271) end)
-else
-local v368 = v62:v179(v2("return '\\v31\\v4\\v61\\v9\\v11\\v9\\v18\\v31\\v10\\v21\\v50\\v18'")())
-if v368 then
-v257()
-v68(function() v167:v238(v368) end)
-end
-end
-end
-end
+
+task.spawn(function()
+    while true do
+        task.wait(waitInterval("ToolInterval", 1))
+        if Unloaded then break end
+        if State.AutoDeployDrone and owns("DroneOwned") then
+            if not LocalPlayer:GetAttribute("DroneDeployed") then
+                pcall(function() DeployDrone:FireServer() end)
+            end
+        end
+    end
 end)
-v234.v240(function()
-while true do
-v234.v235(v254(v2("return '\\v16\\v4\\v4\\v19\\v50\\v3\\v25\\v9\\v11\\v61\\v10\\v19'")(), 1))
-if v63 then break end
-if v64.v369 and v182(v2("return '\\v67\\v11\\v4\\v3\\v9\\v32\\v51\\v3\\v9\\v18'")()) then
-if not v62:v179(v2("return '\\v67\\v11\\v4\\v3\\v9\\v67\\v9\\v24\\v19\\v4\\v21\\v9\\v18'")()) then
-v68(function() v166:v238() end)
-end
-end
-end
+
+task.spawn(function()
+    while true do
+        task.wait(waitInterval("NeedleInterval", 1))
+        if Unloaded then break end
+        if State.AutoFindNeedle then
+            if not LocalPlayer:GetAttribute("NeedleRoundComplete") then
+                local hay = findClosestHay()
+                if not hay then ensureNearPileForPick() hay = findClosestHay() end
+                if hay then
+                    teleportToPart(hay, 4)
+                    local id = hay:GetAttribute("HayId")
+                    if id and not isBagFull() then
+                        pcall(function() PickHay:FireServer(id, getGrabCandidates(hay)) end)
+                    elseif isBagFull() then
+                        trySell()
+                    end
+                else
+                    ensureNearPileForPick()
+                end
+            end
+        end
+        if State.AutoHandInNeedle then
+
+            local farmer = Workspace:FindFirstChild("NPC") and Workspace.NPC:FindFirstChild("Farmer_NPC")
+            if farmer and farmer:GetPivot() then
+                local hrp = getHRP()
+                if hrp and (hrp.Position - farmer:GetPivot().Position).Magnitude > 20 then
+                    hrp.CFrame = farmer:GetPivot() * CFrame.new(0, 0, 4)
+                    task.wait(0.2)
+                end
+            end
+            pcall(function() NeedleHandIn:FireServer() end)
+        end
+    end
 end)
-v234.v240(function()
-while true do
-v234.v235(v254(v2("return '\\v17\\v9\\v9\\v18\\v19\\v9\\v50\\v3\\v25\\v9\\v11\\v61\\v10\\v19'")(), 1))
-if v63 then break end
-if v64.v249 then
-if not v62:v179(v2("return '\\v17\\v9\\v9\\v18\\v19\\v9\\v29\\v4\\v47\\v3\\v18\\v23\\v4\\v48\\v24\\v19\\v9\\v25\\v9'")()) then
-local v353 = v187()
-if not v353 then v257() v353 = v187() end
-if v353 then
-v259(v353, 4)
-local v271 = v353:v179(v2("return '\\v31\\v10\\v21\\v50\\v18'")())
-if v271 and not v218() then
-v68(function() v161:v238(v271, v202(v353)) end)
-elseif v218() then
-v230()
-end
-else
-v257()
-end
-end
-end
-if v64.v370 then
-local v371 = v56:v173(v2("return '\\v17\\v54\\v23'")()) and v56.v372:v173(v2("return '\\v15\\v10\\v11\\v48\\v9\\v11\\v313\\v17\\v54\\v23'")())
-if v371 and v371:v223() then
-local v188 = v184()
-if v188 and (v188.v200 - v371:v223().v200).v201 > 20 then
-v188.v222 = v371:v223() * v222.v108(0, 0, 4)
-v234.v235(0.2)
-end
-end
-v68(function() v170:v238() end)
-end
-end
+
+task.spawn(function()
+    while true do
+        task.wait(waitInterval("BuyInterval", 1))
+        if Unloaded then break end
+        if State.AutoBuyTools then
+            local sel = State.BuyToolsList or {}
+            local list = {}
+            if typeof(sel) == "table" then
+                for k, v in pairs(sel) do
+                    if type(k) == "number" then
+                        if type(v) == "string" then table.insert(list, v) end
+                    elseif v then
+                        table.insert(list, k)
+                    end
+                end
+            end
+            for _, name in ipairs(list) do
+                if name == "Pitchfork" and not owns("PitchforkOwned") then
+                    pcall(function() BuyShopItem:FireServer("Pitchfork") end)
+                elseif name == "TNT" and not owns("TntOwned") then
+                    pcall(function() BuyShopItem:FireServer("Tnt") end)
+                elseif name == "Drone" and not owns("DroneOwned") then
+                    pcall(function() BuyShopItem:FireServer("Drone") end)
+                elseif name == "Vacuum" and not owns("VacuumOwned") then
+                    pcall(function() BuyShopItem:FireServer("Vacuum") end)
+                elseif name == "Infinite Bag" and not owns("InfiniteBagOwned") then
+                    pcall(function() BuyShopItem:FireServer("InfiniteBag") end)
+                elseif name == "Capacity Bag" then
+
+                    local st = tonumber(LocalPlayer:GetAttribute("HayUpgradeCapacity")) or 1
+                    local track = GameConfig.UPGRADE_TRACKS["Capacity"]
+                    if track and st < #track.Levels then
+                        local cost = track.Levels[st + 1].Cost
+                        if getCash() >= (cost or 0) then
+                            pcall(function() BuyUpgrade:FireServer("Capacity") end)
+                        end
+                    end
+                end
+            end
+        end
+    end
 end)
-v234.v240(function()
-while true do
-v234.v235(v254(v2("return '\\v159\\v47\\v21\\v50\\v3\\v25\\v9\\v11\\v61\\v10\\v19'")(), 1))
-if v63 then break end
-if v64.v373 then
-local v374 = v64.v314 or {}
-local v375 = {}
-if v327(v374) == v2("return '\\v25\\v10\\v20\\v19\\v9'")() then
-for v321, v141 in v330(v374) do
-if v376(v321) == v2("return '\\v3\\v47\\v48\\v20\\v9\\v11'")() then
-if v376(v141) == v2("return '\\v37\\v25\\v11\\v6\\v3\\v46'")() then v207.v208(v375, v141) end
-elseif v141 then
-v207.v208(v375, v321)
-end
-end
-end
-for v193, v329 in v195(v375) do
-if v329 == v2("return '\\v54\\v6\\v25\\v12\\v13\\v156\\v4\\v11\\v57'")() and not v182(v2("return '\\v54\\v6\\v25\\v12\\v13\\v156\\v4\\v11\\v57\\v32\\v51\\v3\\v9\\v18'")()) then
-v68(function() v160:v238(v2("return '\\v54\\v6\\v25\\v12\\v13\\v156\\v4\\v11\\v57'")()) end)
-elseif v329 == v2("return '\\v16\\v17\\v16'")() and not v182(v2("return '\\v16\\v3\\v25\\v32\\v51\\v3\\v9\\v18'")()) then
-v68(function() v160:v238(v2("return '\\v16\\v3\\v25'")()) end)
-elseif v329 == v2("return '\\v67\\v11\\v4\\v3\\v9'")() and not v182(v2("return '\\v67\\v11\\v4\\v3\\v9\\v32\\v51\\v3\\v9\\v18'")()) then
-v68(function() v160:v238(v2("return '\\v67\\v11\\v4\\v3\\v9'")()) end)
-elseif v329 == v2("return '\\v59\\v10\\v12\\v47\\v47\\v48'")() and not v182(v2("return '\\v59\\v10\\v12\\v47\\v47\\v48\\v32\\v51\\v3\\v9\\v18'")()) then
-v68(function() v160:v238(v2("return '\\v59\\v10\\v12\\v47\\v47\\v48'")()) end)
-elseif v329 == v2("return '\\v50\\v3\\v156\\v6\\v3\\v6\\v25\\v9\\v14\\v159\\v10\\v46'")() and not v182(v2("return '\\v50\\v3\\v156\\v6\\v3\\v6\\v25\\v9\\v159\\v10\\v46\\v32\\v51\\v3\\v9\\v18'")()) then
-v68(function() v160:v238(v2("return '\\v50\\v3\\v156\\v6\\v3\\v6\\v25\\v9\\v159\\v10\\v46'")()) end)
-elseif v329 == v2("return '\\v23\\v10\\v24\\v10\\v12\\v6\\v25\\v21\\v14\\v159\\v10\\v46'")() then
-local v377 = v151(v62:v179(v2("return '\\v31\\v10\\v21\\v33\\v24\\v46\\v11\\v10\\v18\\v9\\v23\\v10\\v24\\v10\\v12\\v6\\v25\\v21'")())) or 1
-local v263 = v154.v264[v2("return '\\v23\\v10\\v24\\v10\\v12\\v6\\v25\\v21'")()]
-if v263 and v377 < #v263.v266 then
-local v268 = v263.v266[v377 + 1].v269
-if v175() >= (v268 or 0) then
-v68(function() v158:v238(v2("return '\\v23\\v10\\v24\\v10\\v12\\v6\\v25\\v21'")()) end)
-end
-end
-end
-end
-end
-end
+
+task.spawn(function()
+    while true do
+        task.wait(waitInterval("PermInterval", 1))
+        if Unloaded then break end
+        if State.UpgBagSize then tryBuyPermanent("ExtraHoldAmount") end
+        if State.UpgExtraTake then tryBuyPermanent("ExtraTakeAmount") end
+        if State.UpgGemValue then tryBuyPermanent("GemValue") end
+        if State.UpgHayValue then tryBuyPermanent("ExtraHayValuePercentage") end
+    end
 end)
-v234.v240(function()
-while true do
-v234.v235(v254(v2("return '\\v54\\v9\\v11\\v48\\v50\\v3\\v25\\v9\\v11\\v61\\v10\\v19'")(), 1))
-if v63 then break end
-if v64.v378 then v270(v2("return '\\v34\\v5\\v25\\v11\\v10\\v31\\v4\\v19\\v18\\v28\\v48\\v4\\v47\\v3\\v25'")()) end
-if v64.v379 then v270(v2("return '\\v34\\v5\\v25\\v11\\v10\\v16\\v10\\v57\\v9\\v28\\v48\\v4\\v47\\v3\\v25'")()) end
-if v64.v380 then v270(v2("return '\\v165\\v9\\v48\\v59\\v10\\v19\\v47\\v9'")()) end
-if v64.v381 then v270(v2("return '\\v34\\v5\\v25\\v11\\v10\\v31\\v10\\v21\\v59\\v10\\v19\\v47\\v9\\v54\\v9\\v11\\v12\\v9\\v3\\v25\\v10\\v46\\v9'")()) end
-end
+
+task.spawn(function()
+    while true do
+        task.wait(1.2)
+        if Unloaded then break end
+        if State.UpgCapacity then tryBuyTrack("Capacity") end
+        if State.UpgHandSpeed then tryBuyTrack("Speed") end
+        if State.UpgHandGrab then tryBuyTrack("Grab") end
+        if State.UpgHandHold then tryBuyTrack("HandHold") end
+        if State.UpgTntLuck then tryBuyTrack("TntLuck") end
+        if State.UpgTntCooldown then tryBuyTrack("TntCooldown") end
+        if State.UpgTntPower then tryBuyTrack("TntPower") end
+        if State.UpgPitchCooldown then tryBuyTrack("PitchforkCooldown") end
+        if State.UpgPitchHold then tryBuyTrack("PitchforkHold") end
+        if State.UpgPitchSweep then tryBuyTrack("Pitchfork") end
+        if State.UpgDroneSpeed then tryBuyTrack("DroneSpeed") end
+        if State.UpgDroneGrab then tryBuyTrack("DroneGrab") end
+        if State.UpgDroneCapacity then tryBuyTrack("DroneCapacity") end
+        if State.UpgVacPower then tryBuyTrack("VacuumPower") end
+        if State.UpgVacCooling then tryBuyTrack("VacuumCooling") end
+        if State.UpgVacRuntime then tryBuyTrack("VacuumRuntime") end
+    end
 end)
-v234.v240(function()
-while true do
-v234.v235(1.2)
-if v63 then break end
-if v64.v382 then v261(v2("return '\\v23\\v10\\v24\\v10\\v12\\v6\\v25\\v21'")()) end
-if v64.v383 then v261(v2("return '\\v8\\v24\\v9\\v9\\v18'")()) end
-if v64.v384 then v261(v2("return '\\v165\\v11\\v10\\v20'")()) end
-if v64.v385 then v261(v2("return '\\v31\\v10\\v3\\v18\\v31\\v4\\v19\\v18'")()) end
-if v64.v386 then v261(v2("return '\\v16\\v3\\v25\\v298\\v47\\v12\\v57'")()) end
-if v64.v387 then v261(v2("return '\\v16\\v3\\v25\\v23\\v4\\v4\\v19\\v18\\v4\\v51\\v3'")()) end
-if v64.v388 then v261(v2("return '\\v16\\v3\\v25\\v54\\v4\\v51\\v9\\v11'")()) end
-if v64.v389 then v261(v2("return '\\v54\\v6\\v25\\v12\\v13\\v156\\v4\\v11\\v57\\v23\\v4\\v4\\v19\\v18\\v4\\v51\\v3'")()) end
-if v64.v390 then v261(v2("return '\\v54\\v6\\v25\\v12\\v13\\v156\\v4\\v11\\v57\\v31\\v4\\v19\\v18'")()) end
-if v64.v391 then v261(v2("return '\\v54\\v6\\v25\\v12\\v13\\v156\\v4\\v11\\v57'")()) end
-if v64.v392 then v261(v2("return '\\v67\\v11\\v4\\v3\\v9\\v8\\v24\\v9\\v9\\v18'")()) end
-if v64.v393 then v261(v2("return '\\v67\\v11\\v4\\v3\\v9\\v165\\v11\\v10\\v20'")()) end
-if v64.v394 then v261(v2("return '\\v67\\v11\\v4\\v3\\v9\\v23\\v10\\v24\\v10\\v12\\v6\\v25\\v21'")()) end
-if v64.v395 then v261(v2("return '\\v59\\v10\\v12\\v47\\v47\\v48\\v54\\v4\\v51\\v9\\v11'")()) end
-if v64.v396 then v261(v2("return '\\v59\\v10\\v12\\v47\\v47\\v48\\v23\\v4\\v4\\v19\\v6\\v3\\v46'")()) end
-if v64.v397 then v261(v2("return '\\v59\\v10\\v12\\v47\\v47\\v48\\v29\\v47\\v3\\v25\\v6\\v48\\v9'")()) end
-end
+
+task.spawn(function()
+    while true do
+        task.wait(300)
+        if Unloaded then break end
+        if State.AntiAFK then
+            pcall(function()
+                local char = LocalPlayer.Character
+                local hum = char and char:FindFirstChildOfClass("Humanoid")
+                if hum then hum:ChangeState(Enum.HumanoidStateType.Jumping) hum.Jump = true end
+                VirtualUser:CaptureController()
+                VirtualUser:ClickButton2(Vector2.new())
+            end)
+        end
+    end
 end)
-v234.v240(function()
-while true do
-v234.v235(300)
-if v63 then break end
-if v64.v398 then
-v68(function()
-local v185 = v62.v186
-local v399 = v185 and v185:v400(v2("return '\\v31\\v47\\v48\\v10\\v3\\v4\\v6\\v18'")())
-if v399 then v399:v401(v102.v402.v403) v399.v404 = true end
-v58:v405()
-v58:v406(v407.v108())
-end)
+
+if ConfigManager then
+    pcall(function()
+        for _, n in ipairs(ConfigManager:AllConfigs()) do
+            local clean = tostring(n):gsub("%.json$", "")
+            if clean == "default" then
+                local cfg = ConfigManager:CreateConfig("default")
+                for key, el in pairs(Registry) do cfg:Register(key, el) end
+                cfg:Load()
+                break
+            end
+        end
+    end)
 end
-end
+
+pcall(function()
+    task.defer(function()
+        pcall(function() CollectingTab:Select() end)
+    end)
 end)
-if v118 then
-v68(function()
-for v193, v344 in v195(v118:v345()) do
-local v408 = v239(v344):v346(v2("return '\\v304\\v40\\v337\\v37\\v4\\v3\\v306'")(), v2("return ''")())
-if v408 == v2("return '\\v18\\v9\\v156\\v10\\v47\\v19\\v25'")() then
-local v340 = v118:v341(v2("return '\\v18\\v9\\v156\\v10\\v47\\v19\\v25'")())
-for v133, v136 in v330(v65) do v340:v342(v133, v136) end
-v340:v352()
-break
-end
-end
-end)
-end
-v68(function()
-v234.v409(function()
-v68(function() v288:v410() end)
-end)
-end)
-v119(v1, v22 .. v2("return '\\v14\\v19\\v4\\v10\\v18\\v9\\v18\\v40\\v14\\v15\\v10\\v11\\v48\\v6\\v3\\v46\\v312\\v12\\v4\\v19\\v19\\v9\\v12\\v25\\v39\\v37\\v9\\v19\\v19\\v39\\v25\\v4\\v4\\v19\\v37\\v14\\v305\\v14\\v50\\v3\\v61\\v9\\v3\\v25\\v4\\v11\\v21\\v312\\v37\\v13\\v4\\v24\\v39\\v47\\v24\\v46\\v11\\v10\\v18\\v9\\v37'")(), 5, v2("return '\\v12\\v13\\v9\\v12\\v57'")())
-v278(v2("return '\\v279'")() .. v1 .. v2("return '\\v280\\v14\\v298\\v4\\v10\\v18\\v9\\v18\\v14'")() .. v22 .. v2("return '\\v14\\v61\\v6\\v10\\v14\\v49\\v6\\v3\\v18\\v33\\v50'")())
+
+Notify(HubName, gameName .. " loaded. Farming=collect/sell/tools | Inventory=shop/upgrades", 5, "check")
+print("[" .. HubName .. "] Loaded " .. gameName .. " via WindUI")
